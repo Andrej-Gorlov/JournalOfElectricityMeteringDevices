@@ -10,7 +10,7 @@ namespace JournalOfElectricityMeteringDevices
     class Curtain
     {
         bool expectation;
-        public async void OpenUp(System.Windows.Forms.DataGridView DGV, System.Windows.Forms.Panel panel)
+        public async void OpenUp(System.Windows.Forms.Control DGV, System.Windows.Forms.Control panel)
         {
             while (!expectation && DGV.Location.Y < panel.Location.Y)
             {
@@ -22,7 +22,7 @@ namespace JournalOfElectricityMeteringDevices
             }
         }
 
-        public async void CloseDown(System.Windows.Forms.DataGridView DGV, System.Windows.Forms.Panel panel)
+        public async void CloseDown(System.Windows.Forms.Control DGV, System.Windows.Forms.Control panel)
         {
             while (!expectation && 50 < panel.Height)
             {
