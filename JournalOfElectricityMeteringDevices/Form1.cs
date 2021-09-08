@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Diagnostics;
 using System.Threading;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace JournalOfElectricityMeteringDevices
 {
@@ -212,7 +213,31 @@ namespace JournalOfElectricityMeteringDevices
 
         private void buttonExportExcel_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (dataGridView1.Rows.Count > 0)
+                {
+                    Excel.Application application = new Excel.Application();
+                    application.Application.Workbooks.Add(Type.Missing);
+                    for (int i = 1; i < dataGridView1.Columns.Count + 1; i++)
+                    {
+                        application.Cells[1, i] = dataGridView1.Columns[i - 1].HeaderText;
+                    }
+                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                    {
+                        for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                        {
+                            application.Cells[i + 2, j + 1] = dataGridView1.Rows[i].Cells[j].Value;
+                        }
+                    }
+                   application.Columns.AutoFit();
+                    application.Visible = true;
+                }
+            }
+            catch (Exception isk)
+            {
+                MessageBox.Show(isk.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void buttonImportExcel_Click(object sender, EventArgs e)
