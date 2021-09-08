@@ -63,9 +63,29 @@ namespace JournalOfElectricityMeteringDevices.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap blue {
+            get {
+                object obj = ResourceManager.GetObject("blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GorelektrosetNew {
             get {
                 object obj = ResourceManager.GetObject("GorelektrosetNew", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gren {
+            get {
+                object obj = ResourceManager.GetObject("gren", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

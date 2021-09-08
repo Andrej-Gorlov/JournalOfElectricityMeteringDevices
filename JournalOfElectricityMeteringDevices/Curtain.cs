@@ -33,5 +33,24 @@ namespace JournalOfElectricityMeteringDevices
                 expectation = false;
             }
         }
+
+        public async void OpenLeft(System.Windows.Forms.Control panel, int locationX,byte openingSpeed,int delay=1)
+        {
+            while (!expectation && locationX > panel.Location.X)
+            {
+                expectation = true;
+                await Task.Delay(delay);
+                panel.Location = new Point((panel.Location.X+(panel.Location.X/ openingSpeed))/ openingSpeed, panel.Location.Y);
+                expectation = false;
+            }
+        }
+        public async void CloseRight(System.Windows.Forms.Control panel,int locationX , byte closingSpeed, int delay = 1)
+        {
+            while (locationX < panel.Location.X)
+            {
+                await Task.Delay(delay);
+                panel.Location = new Point(panel.Location.X - closingSpeed, panel.Location.Y);
+            }
+        }
     }
 }

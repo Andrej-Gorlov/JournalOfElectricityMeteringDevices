@@ -30,6 +30,11 @@ namespace JournalOfElectricityMeteringDevices
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panelBackground = new System.Windows.Forms.Panel();
+            this.panelSettings = new System.Windows.Forms.Panel();
+            this.buttonChangeBackground = new System.Windows.Forms.Button();
+            this.buttonExportExcel = new System.Windows.Forms.Button();
+            this.buttonImportExcel = new System.Windows.Forms.Button();
             this.panelSQL = new System.Windows.Forms.Panel();
             this.labelCommandSelest = new System.Windows.Forms.Label();
             this.buttonSelect = new System.Windows.Forms.Button();
@@ -38,23 +43,27 @@ namespace JournalOfElectricityMeteringDevices
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.buttonChangeBackground = new System.Windows.Forms.Button();
-            this.buttonExportExcel = new System.Windows.Forms.Button();
-            this.buttonImportExcel = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBlue = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            this.panelBackground.SuspendLayout();
+            this.panelSettings.SuspendLayout();
             this.panelSQL.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBlue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Controls.Add(this.panelBackground);
+            this.panel1.Controls.Add(this.panelSettings);
             this.panel1.Controls.Add(this.panelSQL);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
@@ -67,6 +76,76 @@ namespace JournalOfElectricityMeteringDevices
             this.panel1.Size = new System.Drawing.Size(1264, 761);
             this.panel1.TabIndex = 0;
             // 
+            // panelBackground
+            // 
+            this.panelBackground.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.panelBackground.Controls.Add(this.pictureBox3);
+            this.panelBackground.Controls.Add(this.pictureBlue);
+            this.panelBackground.Location = new System.Drawing.Point(305, 139);
+            this.panelBackground.Name = "panelBackground";
+            this.panelBackground.Size = new System.Drawing.Size(250, 200);
+            this.panelBackground.TabIndex = 24;
+            // 
+            // panelSettings
+            // 
+            this.panelSettings.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.panelSettings.AutoSize = true;
+            this.panelSettings.Controls.Add(this.buttonChangeBackground);
+            this.panelSettings.Controls.Add(this.buttonExportExcel);
+            this.panelSettings.Controls.Add(this.buttonImportExcel);
+            this.panelSettings.Location = new System.Drawing.Point(-250, 122);
+            this.panelSettings.Name = "panelSettings";
+            this.panelSettings.Size = new System.Drawing.Size(300, 545);
+            this.panelSettings.TabIndex = 0;
+            // 
+            // buttonChangeBackground
+            // 
+            this.buttonChangeBackground.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonChangeBackground.FlatAppearance.BorderSize = 0;
+            this.buttonChangeBackground.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.buttonChangeBackground.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
+            this.buttonChangeBackground.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonChangeBackground.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonChangeBackground.Location = new System.Drawing.Point(46, 86);
+            this.buttonChangeBackground.Name = "buttonChangeBackground";
+            this.buttonChangeBackground.Size = new System.Drawing.Size(200, 80);
+            this.buttonChangeBackground.TabIndex = 2;
+            this.buttonChangeBackground.Text = "Изменить Фон ";
+            this.buttonChangeBackground.UseVisualStyleBackColor = true;
+            this.buttonChangeBackground.Click += new System.EventHandler(this.buttonChangeBackground_Click);
+            // 
+            // buttonExportExcel
+            // 
+            this.buttonExportExcel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonExportExcel.FlatAppearance.BorderSize = 0;
+            this.buttonExportExcel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.buttonExportExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
+            this.buttonExportExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonExportExcel.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonExportExcel.Location = new System.Drawing.Point(46, 228);
+            this.buttonExportExcel.Name = "buttonExportExcel";
+            this.buttonExportExcel.Size = new System.Drawing.Size(200, 80);
+            this.buttonExportExcel.TabIndex = 1;
+            this.buttonExportExcel.Text = "Экспорт в Excel ";
+            this.buttonExportExcel.UseVisualStyleBackColor = true;
+            this.buttonExportExcel.Click += new System.EventHandler(this.buttonExportExcel_Click);
+            // 
+            // buttonImportExcel
+            // 
+            this.buttonImportExcel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonImportExcel.FlatAppearance.BorderSize = 0;
+            this.buttonImportExcel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.buttonImportExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
+            this.buttonImportExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonImportExcel.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonImportExcel.Location = new System.Drawing.Point(46, 370);
+            this.buttonImportExcel.Name = "buttonImportExcel";
+            this.buttonImportExcel.Size = new System.Drawing.Size(200, 80);
+            this.buttonImportExcel.TabIndex = 0;
+            this.buttonImportExcel.Text = "Импорт из Еxcel";
+            this.buttonImportExcel.UseVisualStyleBackColor = true;
+            this.buttonImportExcel.Click += new System.EventHandler(this.buttonImportExcel_Click);
+            // 
             // panelSQL
             // 
             this.panelSQL.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
@@ -74,7 +153,7 @@ namespace JournalOfElectricityMeteringDevices
             this.panelSQL.Controls.Add(this.buttonSelect);
             this.panelSQL.Controls.Add(this.label8);
             this.panelSQL.Controls.Add(this.textBoxSELECT);
-            this.panelSQL.Location = new System.Drawing.Point(69, 153);
+            this.panelSQL.Location = new System.Drawing.Point(69, 152);
             this.panelSQL.Name = "panelSQL";
             this.panelSQL.Size = new System.Drawing.Size(1121, 608);
             this.panelSQL.TabIndex = 3;
@@ -169,64 +248,6 @@ namespace JournalOfElectricityMeteringDevices
             this.label1.TabIndex = 4;
             this.label1.Text = "X";
             // 
-            // panel2
-            // 
-            this.panel2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.panel2.AutoSize = true;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.buttonChangeBackground);
-            this.panel2.Controls.Add(this.buttonExportExcel);
-            this.panel2.Controls.Add(this.buttonImportExcel);
-            this.panel2.Location = new System.Drawing.Point(-1, 122);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(300, 545);
-            this.panel2.TabIndex = 0;
-            // 
-            // buttonChangeBackground
-            // 
-            this.buttonChangeBackground.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonChangeBackground.FlatAppearance.BorderSize = 0;
-            this.buttonChangeBackground.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
-            this.buttonChangeBackground.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
-            this.buttonChangeBackground.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonChangeBackground.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonChangeBackground.Location = new System.Drawing.Point(50, 67);
-            this.buttonChangeBackground.Name = "buttonChangeBackground";
-            this.buttonChangeBackground.Size = new System.Drawing.Size(200, 80);
-            this.buttonChangeBackground.TabIndex = 2;
-            this.buttonChangeBackground.Text = "Изменить Фон ";
-            this.buttonChangeBackground.UseVisualStyleBackColor = true;
-            // 
-            // buttonExportExcel
-            // 
-            this.buttonExportExcel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonExportExcel.FlatAppearance.BorderSize = 0;
-            this.buttonExportExcel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
-            this.buttonExportExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
-            this.buttonExportExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonExportExcel.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonExportExcel.Location = new System.Drawing.Point(50, 222);
-            this.buttonExportExcel.Name = "buttonExportExcel";
-            this.buttonExportExcel.Size = new System.Drawing.Size(200, 80);
-            this.buttonExportExcel.TabIndex = 1;
-            this.buttonExportExcel.Text = "Экспорт в Excel ";
-            this.buttonExportExcel.UseVisualStyleBackColor = true;
-            // 
-            // buttonImportExcel
-            // 
-            this.buttonImportExcel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonImportExcel.FlatAppearance.BorderSize = 0;
-            this.buttonImportExcel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
-            this.buttonImportExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
-            this.buttonImportExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonImportExcel.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonImportExcel.Location = new System.Drawing.Point(50, 375);
-            this.buttonImportExcel.Name = "buttonImportExcel";
-            this.buttonImportExcel.Size = new System.Drawing.Size(200, 80);
-            this.buttonImportExcel.TabIndex = 0;
-            this.buttonImportExcel.Text = "Импорт из Еxcel";
-            this.buttonImportExcel.UseVisualStyleBackColor = true;
-            // 
             // dataGridView1
             // 
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -242,6 +263,26 @@ namespace JournalOfElectricityMeteringDevices
             this.dataGridView1.Size = new System.Drawing.Size(1121, 545);
             this.dataGridView1.TabIndex = 2;
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox3.Location = new System.Drawing.Point(133, 23);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(100, 150);
+            this.pictureBox3.TabIndex = 1;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
+            // 
+            // pictureBlue
+            // 
+            this.pictureBlue.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBlue.Location = new System.Drawing.Point(16, 23);
+            this.pictureBlue.Name = "pictureBlue";
+            this.pictureBlue.Size = new System.Drawing.Size(100, 150);
+            this.pictureBlue.TabIndex = 0;
+            this.pictureBlue.TabStop = false;
+            this.pictureBlue.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
@@ -249,6 +290,15 @@ namespace JournalOfElectricityMeteringDevices
             this.pictureBox1.Size = new System.Drawing.Size(90, 90);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(16, 23);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(100, 150);
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // Form1
             // 
@@ -261,11 +311,15 @@ namespace JournalOfElectricityMeteringDevices
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panelBackground.ResumeLayout(false);
+            this.panelSettings.ResumeLayout(false);
             this.panelSQL.ResumeLayout(false);
             this.panelSQL.PerformLayout();
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBlue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -275,7 +329,7 @@ namespace JournalOfElectricityMeteringDevices
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panelSettings;
         private System.Windows.Forms.Panel panelSQL;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -287,6 +341,10 @@ namespace JournalOfElectricityMeteringDevices
         private System.Windows.Forms.Button buttonSelect;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBoxSELECT;
+        private System.Windows.Forms.Panel panelBackground;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBlue;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 
