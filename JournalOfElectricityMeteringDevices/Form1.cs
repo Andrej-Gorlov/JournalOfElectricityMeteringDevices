@@ -25,6 +25,8 @@ namespace JournalOfElectricityMeteringDevices
         Lazy<Curtain> curtain = new Lazy<Curtain>();
         Lazy<AppearancesCollor> appearancesCollor = new Lazy<AppearancesCollor>();
         Lazy<BackgroundColor> backgroundColor = new Lazy<BackgroundColor>();
+        Lazy<TurnControl> turnControl = new Lazy<TurnControl>();
+
         Process processOpenFiel;
 
         bool CanOpenCurtain = true;
@@ -39,6 +41,8 @@ namespace JournalOfElectricityMeteringDevices
             connection = new SqlConnection(ConfigurationManager.ConnectionStrings["LMD"].ConnectionString);
             connection.Open();
 
+            labelOptions.Location = new Point { X=panelSettings.Location.X+260, Y = panelSettings.Location.Y +  200 };
+
             pictureBox1.Image = Properties.Resources.GorelektrosetNew;
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBlue.Image = Properties.Resources.blue;
@@ -48,7 +52,7 @@ namespace JournalOfElectricityMeteringDevices
 
             panelSQL.Size = new Size { Width = 1121, Height = 50 };
             panelSQL.Location = new Point { X = 69, Y = 712 };
-            panelBackground.Location = new Point { X=buttonChangeBackground.Location.X+259, Y = panelSettings.Location.Y+17};// КООРДИНАТЫ
+            panelBackground.Location = new Point { X=buttonChangeBackground.Location.X+200, Y = panelSettings.Location.Y+17};
 
             buttonChangeBackground.Visible = false;
             buttonExportExcel.Visible = false;
@@ -58,6 +62,11 @@ namespace JournalOfElectricityMeteringDevices
             labelCommandSelest.MouseEnter += (s, a) => { labelCommandSelest.ForeColor = Color.FromName("MediumAquamarine"); };
             labelCommandSelest.MouseLeave += (s, a) => { labelCommandSelest.ForeColor = Color.Black; };
 
+            buttonChangeBackground.Click += (s, a) =>{ panelBackground.Visible = true;};
+            dataGridView1.MouseEnter += (s, a) => { panelBackground.Visible = false; };
+            panelSettings.MouseEnter += (s, a) => { panelBackground.Visible = false; };
+
+            turnControl.Value.TurnLebel(labelOptions, -90, "MediumSeaGreen");
             СhangeColor("MediumSeaGreen", "MediumAquamarine");
 
             Parallel.Invoke(
@@ -121,6 +130,7 @@ namespace JournalOfElectricityMeteringDevices
                         {
                             if (CanOpenCurtain == true)
                             {
+                                labelOptions.Visible = false;
                                 curtain.Value.OpenLeft(panelSettings, -1, 2, 2);
                                 buttonChangeBackground.Visible = false;
                                 buttonExportExcel.Visible = false;
@@ -152,6 +162,11 @@ namespace JournalOfElectricityMeteringDevices
                             buttonExportExcel.Visible = false;
                             buttonImportExcel.Visible = false;
                             curtain.Value.CloseRight(panelSettings, -250, 15);
+
+                            labelOptions.Visible = true;
+                            //byte[] foreColorInitial = { 60, 180, 113 };
+                            //byte[] foreColorFinal = { 0, 0, 0 };
+                            //appearancesCollor.Value.ForeColorAppearances(labelOptions, foreColorInitial, foreColorFinal, 3, 9, 5, 70, 350);// не работает планое появление
                         };
 
                         dataGridView1.MouseEnter += (a, s) =>
@@ -161,7 +176,13 @@ namespace JournalOfElectricityMeteringDevices
                             buttonExportExcel.Visible = false;
                             buttonImportExcel.Visible = false;
                             curtain.Value.CloseRight(panelSettings, -250, 15);
+
+                            labelOptions.Visible = true;
+                            //byte[] foreColorInitial = { 60, 180, 113 };
+                            //byte[] foreColorFinal = { 0, 0, 0 };
+                            //appearancesCollor.Value.ForeColorAppearances(labelOptions, foreColorInitial, foreColorFinal, 3, 9, 5, 70, 350);// не работает планое появление
                         };
+
                     }).Start();
                 }
             );
@@ -205,12 +226,6 @@ namespace JournalOfElectricityMeteringDevices
                 MessageBox.Show(isk.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void buttonChangeBackground_Click(object sender, EventArgs e)
-        {
-            panelBackground.Visible = true;
-        }
-
         private void buttonExportExcel_Click(object sender, EventArgs e)
         {
             try
@@ -220,17 +235,13 @@ namespace JournalOfElectricityMeteringDevices
                     Excel.Application application = new Excel.Application();
                     application.Application.Workbooks.Add(Type.Missing);
                     for (int i = 1; i < dataGridView1.Columns.Count + 1; i++)
-                    {
                         application.Cells[1, i] = dataGridView1.Columns[i - 1].HeaderText;
-                    }
                     for (int i = 0; i < dataGridView1.Rows.Count; i++)
                     {
                         for (int j = 0; j < dataGridView1.Columns.Count; j++)
-                        {
                             application.Cells[i + 2, j + 1] = dataGridView1.Rows[i].Cells[j].Value;
-                        }
                     }
-                   application.Columns.AutoFit();
+                    application.Columns.AutoFit();
                     application.Visible = true;
                 }
             }
@@ -239,23 +250,23 @@ namespace JournalOfElectricityMeteringDevices
                 MessageBox.Show(isk.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void buttonImportExcel_Click(object sender, EventArgs e)
         {
 
         }
-
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             ColorB = false;
             СhangeColor("ActiveCaption", "GradientInactiveCaption");
             panelBackground.Visible = false;
+            labelOptions.BackColor = Color.FromName("ActiveCaption");// не меняет цвет фона
         }
         private void pictureBox3_Click(object sender, EventArgs e)
         {
             ColorB = true;
             СhangeColor("MediumSeaGreen", "MediumAquamarine");
             panelBackground.Visible = false;
+            labelOptions.BackColor = Color.FromName("MediumSeaGreen");// не меняет цвет фона
         }
         private void СhangeColor(string mainColor, string secondaryColor)
         {

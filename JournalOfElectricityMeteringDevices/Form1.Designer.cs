@@ -31,31 +31,32 @@ namespace JournalOfElectricityMeteringDevices
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelBackground = new System.Windows.Forms.Panel();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBlue = new System.Windows.Forms.PictureBox();
+            this.labelOptions = new System.Windows.Forms.Label();
             this.panelSettings = new System.Windows.Forms.Panel();
             this.buttonChangeBackground = new System.Windows.Forms.Button();
             this.buttonExportExcel = new System.Windows.Forms.Button();
             this.buttonImportExcel = new System.Windows.Forms.Button();
             this.panelSQL = new System.Windows.Forms.Panel();
+            this.textBoxSELECT = new System.Windows.Forms.TextBox();
             this.labelCommandSelest = new System.Windows.Forms.Label();
             this.buttonSelect = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBoxSELECT = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBlue = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panelBackground.SuspendLayout();
-            this.panelSettings.SuspendLayout();
-            this.panelSQL.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBlue)).BeginInit();
+            this.panelSettings.SuspendLayout();
+            this.panelSQL.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,13 +64,14 @@ namespace JournalOfElectricityMeteringDevices
             // 
             this.panel1.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.panel1.Controls.Add(this.panelBackground);
+            this.panel1.Controls.Add(this.labelOptions);
             this.panel1.Controls.Add(this.panelSettings);
             this.panel1.Controls.Add(this.panelSQL);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -81,10 +83,41 @@ namespace JournalOfElectricityMeteringDevices
             this.panelBackground.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.panelBackground.Controls.Add(this.pictureBox3);
             this.panelBackground.Controls.Add(this.pictureBlue);
-            this.panelBackground.Location = new System.Drawing.Point(305, 139);
+            this.panelBackground.Location = new System.Drawing.Point(385, 139);
             this.panelBackground.Name = "panelBackground";
             this.panelBackground.Size = new System.Drawing.Size(250, 200);
             this.panelBackground.TabIndex = 24;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox3.Location = new System.Drawing.Point(133, 23);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(100, 150);
+            this.pictureBox3.TabIndex = 1;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
+            // 
+            // pictureBlue
+            // 
+            this.pictureBlue.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBlue.Location = new System.Drawing.Point(16, 23);
+            this.pictureBlue.Name = "pictureBlue";
+            this.pictureBlue.Size = new System.Drawing.Size(100, 150);
+            this.pictureBlue.TabIndex = 0;
+            this.pictureBlue.TabStop = false;
+            this.pictureBlue.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
+            // labelOptions
+            // 
+            this.labelOptions.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelOptions.AutoSize = true;
+            this.labelOptions.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelOptions.Location = new System.Drawing.Point(233, 47);
+            this.labelOptions.Name = "labelOptions";
+            this.labelOptions.Size = new System.Drawing.Size(127, 27);
+            this.labelOptions.TabIndex = 24;
+            this.labelOptions.Text = "Параметры";
             // 
             // panelSettings
             // 
@@ -112,7 +145,6 @@ namespace JournalOfElectricityMeteringDevices
             this.buttonChangeBackground.TabIndex = 2;
             this.buttonChangeBackground.Text = "Изменить Фон ";
             this.buttonChangeBackground.UseVisualStyleBackColor = true;
-            this.buttonChangeBackground.Click += new System.EventHandler(this.buttonChangeBackground_Click);
             // 
             // buttonExportExcel
             // 
@@ -149,14 +181,28 @@ namespace JournalOfElectricityMeteringDevices
             // panelSQL
             // 
             this.panelSQL.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.panelSQL.Controls.Add(this.textBoxSELECT);
             this.panelSQL.Controls.Add(this.labelCommandSelest);
             this.panelSQL.Controls.Add(this.buttonSelect);
             this.panelSQL.Controls.Add(this.label8);
-            this.panelSQL.Controls.Add(this.textBoxSELECT);
             this.panelSQL.Location = new System.Drawing.Point(69, 152);
             this.panelSQL.Name = "panelSQL";
             this.panelSQL.Size = new System.Drawing.Size(1121, 608);
             this.panelSQL.TabIndex = 3;
+            // 
+            // textBoxSELECT
+            // 
+            this.textBoxSELECT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxSELECT.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.textBoxSELECT.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxSELECT.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxSELECT.Location = new System.Drawing.Point(27, 58);
+            this.textBoxSELECT.Multiline = true;
+            this.textBoxSELECT.Name = "textBoxSELECT";
+            this.textBoxSELECT.Size = new System.Drawing.Size(1061, 489);
+            this.textBoxSELECT.TabIndex = 7;
             // 
             // labelCommandSelest
             // 
@@ -201,20 +247,6 @@ namespace JournalOfElectricityMeteringDevices
             this.label8.TabIndex = 21;
             this.label8.Text = "Command MySQL ";
             // 
-            // textBoxSELECT
-            // 
-            this.textBoxSELECT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxSELECT.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.textBoxSELECT.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxSELECT.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxSELECT.Location = new System.Drawing.Point(27, 58);
-            this.textBoxSELECT.Multiline = true;
-            this.textBoxSELECT.Name = "textBoxSELECT";
-            this.textBoxSELECT.Size = new System.Drawing.Size(1061, 489);
-            this.textBoxSELECT.TabIndex = 7;
-            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -248,6 +280,14 @@ namespace JournalOfElectricityMeteringDevices
             this.label1.TabIndex = 4;
             this.label1.Text = "X";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(90, 90);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
             // dataGridView1
             // 
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -262,34 +302,6 @@ namespace JournalOfElectricityMeteringDevices
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(1121, 545);
             this.dataGridView1.TabIndex = 2;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox3.Location = new System.Drawing.Point(133, 23);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(100, 150);
-            this.pictureBox3.TabIndex = 1;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
-            // 
-            // pictureBlue
-            // 
-            this.pictureBlue.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBlue.Location = new System.Drawing.Point(16, 23);
-            this.pictureBlue.Name = "pictureBlue";
-            this.pictureBlue.Size = new System.Drawing.Size(100, 150);
-            this.pictureBlue.TabIndex = 0;
-            this.pictureBlue.TabStop = false;
-            this.pictureBlue.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(90, 90);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
@@ -312,13 +324,13 @@ namespace JournalOfElectricityMeteringDevices
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelBackground.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBlue)).EndInit();
             this.panelSettings.ResumeLayout(false);
             this.panelSQL.ResumeLayout(false);
             this.panelSQL.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBlue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
@@ -345,6 +357,7 @@ namespace JournalOfElectricityMeteringDevices
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBlue;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label labelOptions;
     }
 }
 
