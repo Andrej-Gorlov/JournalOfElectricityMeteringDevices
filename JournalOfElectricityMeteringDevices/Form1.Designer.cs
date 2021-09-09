@@ -39,6 +39,11 @@ namespace JournalOfElectricityMeteringDevices
             this.buttonExportExcel = new System.Windows.Forms.Button();
             this.buttonImportExcel = new System.Windows.Forms.Button();
             this.panelSQL = new System.Windows.Forms.Panel();
+            this.panelImport = new System.Windows.Forms.Panel();
+            this.buttonBrows = new System.Windows.Forms.Button();
+            this.buttonImportFile = new System.Windows.Forms.Button();
+            this.cboSheet = new System.Windows.Forms.ComboBox();
+            this.txtFilename = new System.Windows.Forms.TextBox();
             this.textBoxSELECT = new System.Windows.Forms.TextBox();
             this.labelCommandSelest = new System.Windows.Forms.Label();
             this.buttonSelect = new System.Windows.Forms.Button();
@@ -55,6 +60,7 @@ namespace JournalOfElectricityMeteringDevices
             ((System.ComponentModel.ISupportInitialize)(this.pictureBlue)).BeginInit();
             this.panelSettings.SuspendLayout();
             this.panelSQL.SuspendLayout();
+            this.panelImport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -63,6 +69,7 @@ namespace JournalOfElectricityMeteringDevices
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.panel1.Controls.Add(this.panelImport);
             this.panel1.Controls.Add(this.panelBackground);
             this.panel1.Controls.Add(this.labelOptions);
             this.panel1.Controls.Add(this.panelSettings);
@@ -176,7 +183,6 @@ namespace JournalOfElectricityMeteringDevices
             this.buttonImportExcel.TabIndex = 0;
             this.buttonImportExcel.Text = "Импорт из Еxcel";
             this.buttonImportExcel.UseVisualStyleBackColor = true;
-            this.buttonImportExcel.Click += new System.EventHandler(this.buttonImportExcel_Click);
             // 
             // panelSQL
             // 
@@ -189,6 +195,75 @@ namespace JournalOfElectricityMeteringDevices
             this.panelSQL.Name = "panelSQL";
             this.panelSQL.Size = new System.Drawing.Size(1121, 608);
             this.panelSQL.TabIndex = 3;
+            // 
+            // panelImport
+            // 
+            this.panelImport.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.panelImport.Controls.Add(this.buttonBrows);
+            this.panelImport.Controls.Add(this.buttonImportFile);
+            this.panelImport.Controls.Add(this.cboSheet);
+            this.panelImport.Controls.Add(this.txtFilename);
+            this.panelImport.Location = new System.Drawing.Point(584, 16);
+            this.panelImport.Name = "panelImport";
+            this.panelImport.Size = new System.Drawing.Size(350, 100);
+            this.panelImport.TabIndex = 25;
+            // 
+            // buttonBrows
+            // 
+            this.buttonBrows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonBrows.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonBrows.FlatAppearance.BorderSize = 0;
+            this.buttonBrows.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.buttonBrows.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
+            this.buttonBrows.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonBrows.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonBrows.ForeColor = System.Drawing.Color.Black;
+            this.buttonBrows.Location = new System.Drawing.Point(274, 16);
+            this.buttonBrows.Name = "buttonBrows";
+            this.buttonBrows.Size = new System.Drawing.Size(68, 31);
+            this.buttonBrows.TabIndex = 27;
+            this.buttonBrows.Text = "...";
+            this.buttonBrows.UseVisualStyleBackColor = true;
+            this.buttonBrows.Click += new System.EventHandler(this.buttonBrows_Click);
+            // 
+            // buttonImportFile
+            // 
+            this.buttonImportFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonImportFile.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonImportFile.FlatAppearance.BorderSize = 0;
+            this.buttonImportFile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.buttonImportFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
+            this.buttonImportFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonImportFile.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonImportFile.ForeColor = System.Drawing.Color.Black;
+            this.buttonImportFile.Location = new System.Drawing.Point(274, 56);
+            this.buttonImportFile.Name = "buttonImportFile";
+            this.buttonImportFile.Size = new System.Drawing.Size(68, 31);
+            this.buttonImportFile.TabIndex = 26;
+            this.buttonImportFile.Text = "Импорт";
+            this.buttonImportFile.UseVisualStyleBackColor = true;
+            // 
+            // cboSheet
+            // 
+            this.cboSheet.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.cboSheet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboSheet.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cboSheet.FormattingEnabled = true;
+            this.cboSheet.Location = new System.Drawing.Point(10, 56);
+            this.cboSheet.Name = "cboSheet";
+            this.cboSheet.Size = new System.Drawing.Size(258, 31);
+            this.cboSheet.TabIndex = 1;
+            // 
+            // txtFilename
+            // 
+            this.txtFilename.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.txtFilename.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtFilename.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtFilename.Location = new System.Drawing.Point(11, 14);
+            this.txtFilename.Name = "txtFilename";
+            this.txtFilename.ReadOnly = true;
+            this.txtFilename.Size = new System.Drawing.Size(258, 32);
+            this.txtFilename.TabIndex = 0;
             // 
             // textBoxSELECT
             // 
@@ -329,6 +404,8 @@ namespace JournalOfElectricityMeteringDevices
             this.panelSettings.ResumeLayout(false);
             this.panelSQL.ResumeLayout(false);
             this.panelSQL.PerformLayout();
+            this.panelImport.ResumeLayout(false);
+            this.panelImport.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -358,6 +435,11 @@ namespace JournalOfElectricityMeteringDevices
         private System.Windows.Forms.PictureBox pictureBlue;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label labelOptions;
+        private System.Windows.Forms.Button buttonImportFile;
+        private System.Windows.Forms.Panel panelImport;
+        private System.Windows.Forms.ComboBox cboSheet;
+        private System.Windows.Forms.TextBox txtFilename;
+        private System.Windows.Forms.Button buttonBrows;
     }
 }
 

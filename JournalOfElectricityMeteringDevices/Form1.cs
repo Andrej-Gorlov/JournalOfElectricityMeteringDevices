@@ -13,6 +13,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Threading;
 using Excel = Microsoft.Office.Interop.Excel;
+using ExcelDataReader;
 
 namespace JournalOfElectricityMeteringDevices
 {
@@ -21,6 +22,7 @@ namespace JournalOfElectricityMeteringDevices
         private SqlConnection connection = null;
         private SqlDataAdapter dataAdapter = null;
         private DataSet dataSet = null;
+        private DataTableCollection tableCollection;
 
         Lazy<Curtain> curtain = new Lazy<Curtain>();
         Lazy<AppearancesCollor> appearancesCollor = new Lazy<AppearancesCollor>();
@@ -52,20 +54,28 @@ namespace JournalOfElectricityMeteringDevices
 
             panelSQL.Size = new Size { Width = 1121, Height = 50 };
             panelSQL.Location = new Point { X = 69, Y = 712 };
-            panelBackground.Location = new Point { X=buttonChangeBackground.Location.X+200, Y = panelSettings.Location.Y+17};
+            panelBackground.Location = new Point { X=buttonChangeBackground.Location.X+199, Y = panelSettings.Location.Y+17};
+            panelImport.Location = new Point { X = buttonImportExcel.Location.X + 199, Y = panelSettings.Location.Y + 360 };
 
             buttonChangeBackground.Visible = false;
             buttonExportExcel.Visible = false;
             buttonImportExcel.Visible = false;
             panelBackground.Visible = false;
+            panelImport.Visible = false;
 
             labelCommandSelest.MouseEnter += (s, a) => { labelCommandSelest.ForeColor = Color.FromName("MediumAquamarine"); };
             labelCommandSelest.MouseLeave += (s, a) => { labelCommandSelest.ForeColor = Color.Black; };
 
             buttonChangeBackground.Click += (s, a) =>{ panelBackground.Visible = true;};
-            dataGridView1.MouseEnter += (s, a) => { panelBackground.Visible = false; };
-            panelSettings.MouseEnter += (s, a) => { panelBackground.Visible = false; };
+            buttonImportExcel.Click += (s, a) => { panelImport.Visible = true; };
+            dataGridView1.MouseEnter += (s, a) => { panelBackground.Visible = false; panelImport.Visible = false; };
+            panelSettings.MouseEnter += (s, a) => { panelBackground.Visible = false; panelImport.Visible = false; };
 
+            cboSheet.SelectedIndexChanged += (s, a) =>
+            {
+                DataTable dt = tableCollection[cboSheet.SelectedIndex.ToString()];
+                dataGridView1.DataSource = dt;
+            };
             turnControl.Value.TurnLebel(labelOptions, -90, "MediumSeaGreen");
             СhangeColor("MediumSeaGreen", "MediumAquamarine");
 
@@ -250,10 +260,6 @@ namespace JournalOfElectricityMeteringDevices
                 MessageBox.Show(isk.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void buttonImportExcel_Click(object sender, EventArgs e)
-        {
-
-        }
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             ColorB = false;
@@ -295,6 +301,31 @@ namespace JournalOfElectricityMeteringDevices
             backgroundColor.Value.AskColor(panelBackground);
             backgroundColor.Value.AskColor(pictureBlue);
             backgroundColor.Value.AskColor(pictureBox3);
+            backgroundColor.Value.AskColor(panelImport);
+        }
+        private void buttonBrows_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "Excel 97-2003 Workbook|*.xls|Excel Workbook|*.xlsx" })
+            {
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    txtFilename.Text = openFileDialog.FileName;
+                    using (var stream = File.Open(openFileDialog.FileName, FileMode.Open, FileAccess.Read))
+                    {
+                        using (IExcelDataReader reader = ExcelReaderFactory.CreateReader(stream))
+                        {
+                            DataSet result = reader.AsDataSet(new ExcelDataSetConfiguration()
+                            {
+                                ConfigureDataTable = (_) => new ExcelDataTableConfiguration() { UseHeaderRow = true }
+                            });
+                            tableCollection = result.Tables;
+                            cboSheet.Items.Clear();
+                            foreach (DataTable item in tableCollection)
+                                cboSheet.Items.Add(item.TableName);
+                        }
+                    }
+                }
+            }
         }
     }
 }
