@@ -29,21 +29,40 @@ namespace JournalOfElectricityMeteringDevices
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelBackground = new System.Windows.Forms.Panel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBlue = new System.Windows.Forms.PictureBox();
             this.labelOptions = new System.Windows.Forms.Label();
             this.panelSettings = new System.Windows.Forms.Panel();
+            this.buttonChoice = new System.Windows.Forms.Button();
             this.buttonChangeBackground = new System.Windows.Forms.Button();
             this.buttonExportExcel = new System.Windows.Forms.Button();
             this.buttonImportExcel = new System.Windows.Forms.Button();
             this.panelSQL = new System.Windows.Forms.Panel();
-            this.panelImport = new System.Windows.Forms.Panel();
-            this.buttonBrows = new System.Windows.Forms.Button();
-            this.buttonImportFile = new System.Windows.Forms.Button();
-            this.cboSheet = new System.Windows.Forms.ComboBox();
-            this.txtFilename = new System.Windows.Forms.TextBox();
+            this.panelChoice = new System.Windows.Forms.Panel();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.textBoxDeleteJ = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textAddJ = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.buttonCoosingMagazine = new System.Windows.Forms.Button();
+            this.cboChoice = new System.Windows.Forms.ComboBox();
             this.textBoxSELECT = new System.Windows.Forms.TextBox();
             this.labelCommandSelest = new System.Windows.Forms.Label();
             this.buttonSelect = new System.Windows.Forms.Button();
@@ -54,13 +73,25 @@ namespace JournalOfElectricityMeteringDevices
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.openFD = new System.Windows.Forms.OpenFileDialog();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panelBackground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBlue)).BeginInit();
             this.panelSettings.SuspendLayout();
             this.panelSQL.SuspendLayout();
-            this.panelImport.SuspendLayout();
+            this.panelChoice.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -69,7 +100,6 @@ namespace JournalOfElectricityMeteringDevices
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.panel1.Controls.Add(this.panelImport);
             this.panel1.Controls.Add(this.panelBackground);
             this.panel1.Controls.Add(this.labelOptions);
             this.panel1.Controls.Add(this.panelSettings);
@@ -130,6 +160,7 @@ namespace JournalOfElectricityMeteringDevices
             // 
             this.panelSettings.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.panelSettings.AutoSize = true;
+            this.panelSettings.Controls.Add(this.buttonChoice);
             this.panelSettings.Controls.Add(this.buttonChangeBackground);
             this.panelSettings.Controls.Add(this.buttonExportExcel);
             this.panelSettings.Controls.Add(this.buttonImportExcel);
@@ -137,6 +168,21 @@ namespace JournalOfElectricityMeteringDevices
             this.panelSettings.Name = "panelSettings";
             this.panelSettings.Size = new System.Drawing.Size(300, 545);
             this.panelSettings.TabIndex = 0;
+            // 
+            // buttonChoice
+            // 
+            this.buttonChoice.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonChoice.FlatAppearance.BorderSize = 0;
+            this.buttonChoice.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.buttonChoice.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
+            this.buttonChoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonChoice.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonChoice.Location = new System.Drawing.Point(46, 421);
+            this.buttonChoice.Name = "buttonChoice";
+            this.buttonChoice.Size = new System.Drawing.Size(200, 80);
+            this.buttonChoice.TabIndex = 3;
+            this.buttonChoice.Text = "Журналы";
+            this.buttonChoice.UseVisualStyleBackColor = true;
             // 
             // buttonChangeBackground
             // 
@@ -146,7 +192,7 @@ namespace JournalOfElectricityMeteringDevices
             this.buttonChangeBackground.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
             this.buttonChangeBackground.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonChangeBackground.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonChangeBackground.Location = new System.Drawing.Point(46, 86);
+            this.buttonChangeBackground.Location = new System.Drawing.Point(46, 55);
             this.buttonChangeBackground.Name = "buttonChangeBackground";
             this.buttonChangeBackground.Size = new System.Drawing.Size(200, 80);
             this.buttonChangeBackground.TabIndex = 2;
@@ -161,7 +207,7 @@ namespace JournalOfElectricityMeteringDevices
             this.buttonExportExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
             this.buttonExportExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonExportExcel.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonExportExcel.Location = new System.Drawing.Point(46, 228);
+            this.buttonExportExcel.Location = new System.Drawing.Point(46, 177);
             this.buttonExportExcel.Name = "buttonExportExcel";
             this.buttonExportExcel.Size = new System.Drawing.Size(200, 80);
             this.buttonExportExcel.TabIndex = 1;
@@ -177,16 +223,18 @@ namespace JournalOfElectricityMeteringDevices
             this.buttonImportExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
             this.buttonImportExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonImportExcel.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonImportExcel.Location = new System.Drawing.Point(46, 370);
+            this.buttonImportExcel.Location = new System.Drawing.Point(46, 299);
             this.buttonImportExcel.Name = "buttonImportExcel";
             this.buttonImportExcel.Size = new System.Drawing.Size(200, 80);
             this.buttonImportExcel.TabIndex = 0;
             this.buttonImportExcel.Text = "Импорт из Еxcel";
             this.buttonImportExcel.UseVisualStyleBackColor = true;
+            this.buttonImportExcel.Click += new System.EventHandler(this.buttonImportExcel_Click);
             // 
             // panelSQL
             // 
             this.panelSQL.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.panelSQL.Controls.Add(this.panelChoice);
             this.panelSQL.Controls.Add(this.textBoxSELECT);
             this.panelSQL.Controls.Add(this.labelCommandSelest);
             this.panelSQL.Controls.Add(this.buttonSelect);
@@ -196,74 +244,134 @@ namespace JournalOfElectricityMeteringDevices
             this.panelSQL.Size = new System.Drawing.Size(1121, 608);
             this.panelSQL.TabIndex = 3;
             // 
-            // panelImport
+            // panelChoice
             // 
-            this.panelImport.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.panelImport.Controls.Add(this.buttonBrows);
-            this.panelImport.Controls.Add(this.buttonImportFile);
-            this.panelImport.Controls.Add(this.cboSheet);
-            this.panelImport.Controls.Add(this.txtFilename);
-            this.panelImport.Location = new System.Drawing.Point(584, 16);
-            this.panelImport.Name = "panelImport";
-            this.panelImport.Size = new System.Drawing.Size(350, 100);
-            this.panelImport.TabIndex = 25;
+            this.panelChoice.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.panelChoice.Controls.Add(this.buttonDelete);
+            this.panelChoice.Controls.Add(this.buttonAdd);
+            this.panelChoice.Controls.Add(this.textBoxDeleteJ);
+            this.panelChoice.Controls.Add(this.label6);
+            this.panelChoice.Controls.Add(this.textAddJ);
+            this.panelChoice.Controls.Add(this.label5);
+            this.panelChoice.Controls.Add(this.label4);
+            this.panelChoice.Controls.Add(this.buttonCoosingMagazine);
+            this.panelChoice.Controls.Add(this.cboChoice);
+            this.panelChoice.Location = new System.Drawing.Point(582, 70);
+            this.panelChoice.Name = "panelChoice";
+            this.panelChoice.Size = new System.Drawing.Size(350, 200);
+            this.panelChoice.TabIndex = 25;
             // 
-            // buttonBrows
+            // buttonDelete
             // 
-            this.buttonBrows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBrows.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonBrows.FlatAppearance.BorderSize = 0;
-            this.buttonBrows.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
-            this.buttonBrows.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
-            this.buttonBrows.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonBrows.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonBrows.ForeColor = System.Drawing.Color.Black;
-            this.buttonBrows.Location = new System.Drawing.Point(274, 16);
-            this.buttonBrows.Name = "buttonBrows";
-            this.buttonBrows.Size = new System.Drawing.Size(68, 31);
-            this.buttonBrows.TabIndex = 27;
-            this.buttonBrows.Text = "...";
-            this.buttonBrows.UseVisualStyleBackColor = true;
-            this.buttonBrows.Click += new System.EventHandler(this.buttonBrows_Click);
+            this.buttonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDelete.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonDelete.FlatAppearance.BorderSize = 0;
+            this.buttonDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.buttonDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
+            this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDelete.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonDelete.ForeColor = System.Drawing.Color.Black;
+            this.buttonDelete.Location = new System.Drawing.Point(276, 159);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(68, 30);
+            this.buttonDelete.TabIndex = 33;
+            this.buttonDelete.Text = "ОК";
+            this.buttonDelete.UseVisualStyleBackColor = true;
             // 
-            // buttonImportFile
+            // buttonAdd
             // 
-            this.buttonImportFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonImportFile.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonImportFile.FlatAppearance.BorderSize = 0;
-            this.buttonImportFile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
-            this.buttonImportFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
-            this.buttonImportFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonImportFile.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonImportFile.ForeColor = System.Drawing.Color.Black;
-            this.buttonImportFile.Location = new System.Drawing.Point(274, 56);
-            this.buttonImportFile.Name = "buttonImportFile";
-            this.buttonImportFile.Size = new System.Drawing.Size(68, 31);
-            this.buttonImportFile.TabIndex = 26;
-            this.buttonImportFile.Text = "Импорт";
-            this.buttonImportFile.UseVisualStyleBackColor = true;
+            this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonAdd.FlatAppearance.BorderSize = 0;
+            this.buttonAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.buttonAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
+            this.buttonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAdd.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAdd.ForeColor = System.Drawing.Color.Black;
+            this.buttonAdd.Location = new System.Drawing.Point(276, 100);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(68, 30);
+            this.buttonAdd.TabIndex = 32;
+            this.buttonAdd.Text = "ОК";
+            this.buttonAdd.UseVisualStyleBackColor = true;
             // 
-            // cboSheet
+            // textBoxDeleteJ
             // 
-            this.cboSheet.BackColor = System.Drawing.Color.MediumAquamarine;
-            this.cboSheet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboSheet.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cboSheet.FormattingEnabled = true;
-            this.cboSheet.Location = new System.Drawing.Point(10, 56);
-            this.cboSheet.Name = "cboSheet";
-            this.cboSheet.Size = new System.Drawing.Size(258, 31);
-            this.cboSheet.TabIndex = 1;
+            this.textBoxDeleteJ.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.textBoxDeleteJ.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxDeleteJ.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxDeleteJ.Location = new System.Drawing.Point(10, 161);
+            this.textBoxDeleteJ.Name = "textBoxDeleteJ";
+            this.textBoxDeleteJ.Size = new System.Drawing.Size(258, 25);
+            this.textBoxDeleteJ.TabIndex = 31;
             // 
-            // txtFilename
+            // label6
             // 
-            this.txtFilename.BackColor = System.Drawing.Color.MediumAquamarine;
-            this.txtFilename.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtFilename.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtFilename.Location = new System.Drawing.Point(11, 14);
-            this.txtFilename.Name = "txtFilename";
-            this.txtFilename.ReadOnly = true;
-            this.txtFilename.Size = new System.Drawing.Size(258, 32);
-            this.txtFilename.TabIndex = 0;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.Location = new System.Drawing.Point(13, 138);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(138, 21);
+            this.label6.TabIndex = 30;
+            this.label6.Text = "Удалить журнал";
+            // 
+            // textAddJ
+            // 
+            this.textAddJ.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.textAddJ.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textAddJ.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textAddJ.Location = new System.Drawing.Point(10, 102);
+            this.textAddJ.Name = "textAddJ";
+            this.textAddJ.Size = new System.Drawing.Size(258, 25);
+            this.textAddJ.TabIndex = 29;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Location = new System.Drawing.Point(11, 76);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(151, 21);
+            this.label5.TabIndex = 28;
+            this.label5.Text = "Добавить журнал";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(11, 10);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(224, 21);
+            this.label4.TabIndex = 27;
+            this.label4.Text = "Выберите учетный период";
+            // 
+            // buttonCoosingMagazine
+            // 
+            this.buttonCoosingMagazine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCoosingMagazine.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonCoosingMagazine.FlatAppearance.BorderSize = 0;
+            this.buttonCoosingMagazine.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.buttonCoosingMagazine.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
+            this.buttonCoosingMagazine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCoosingMagazine.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonCoosingMagazine.ForeColor = System.Drawing.Color.Black;
+            this.buttonCoosingMagazine.Location = new System.Drawing.Point(276, 41);
+            this.buttonCoosingMagazine.Name = "buttonCoosingMagazine";
+            this.buttonCoosingMagazine.Size = new System.Drawing.Size(68, 29);
+            this.buttonCoosingMagazine.TabIndex = 26;
+            this.buttonCoosingMagazine.Text = "ОК";
+            this.buttonCoosingMagazine.UseVisualStyleBackColor = true;
+            // 
+            // cboChoice
+            // 
+            this.cboChoice.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.cboChoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboChoice.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cboChoice.FormattingEnabled = true;
+            this.cboChoice.Location = new System.Drawing.Point(10, 41);
+            this.cboChoice.Name = "cboChoice";
+            this.cboChoice.Size = new System.Drawing.Size(258, 29);
+            this.cboChoice.TabIndex = 1;
             // 
             // textBoxSELECT
             // 
@@ -365,16 +473,41 @@ namespace JournalOfElectricityMeteringDevices
             // 
             // dataGridView1
             // 
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.MediumAquamarine;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6,
+            this.Column7,
+            this.Column8,
+            this.Column9,
+            this.Column10,
+            this.Column11});
             this.dataGridView1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dataGridView1.GridColor = System.Drawing.Color.MediumSeaGreen;
             this.dataGridView1.Location = new System.Drawing.Point(69, 122);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1121, 545);
             this.dataGridView1.TabIndex = 2;
             // 
@@ -386,6 +519,102 @@ namespace JournalOfElectricityMeteringDevices
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
+            // openFD
+            // 
+            this.openFD.FileName = "openFD1";
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column1.HeaderText = "№";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 53;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Column2.HeaderText = "Заявитель";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Column3.HeaderText = "Объект";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Column4.HeaderText = "Центр питания";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Column5.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Column5.HeaderText = "Мощность";
+            this.Column5.Name = "Column5";
+            this.Column5.Width = 121;
+            // 
+            // Column6
+            // 
+            this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Column6.DefaultCellStyle = dataGridViewCellStyle8;
+            this.Column6.HeaderText = "Тип ПУ";
+            this.Column6.Name = "Column6";
+            // 
+            // Column7
+            // 
+            this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Column7.DefaultCellStyle = dataGridViewCellStyle9;
+            this.Column7.HeaderText = "№ ТУ";
+            this.Column7.Name = "Column7";
+            // 
+            // Column8
+            // 
+            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Column8.DefaultCellStyle = dataGridViewCellStyle10;
+            this.Column8.HeaderText = "Положение реле";
+            this.Column8.Name = "Column8";
+            this.Column8.Width = 151;
+            // 
+            // Column9
+            // 
+            this.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Column9.DefaultCellStyle = dataGridViewCellStyle11;
+            this.Column9.HeaderText = "Заводской номер";
+            this.Column9.Name = "Column9";
+            // 
+            // Column10
+            // 
+            this.Column10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Column10.DefaultCellStyle = dataGridViewCellStyle12;
+            this.Column10.HeaderText = "Дата поверки";
+            this.Column10.Name = "Column10";
+            // 
+            // Column11
+            // 
+            this.Column11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Column11.DefaultCellStyle = dataGridViewCellStyle13;
+            this.Column11.HeaderText = "Статус";
+            this.Column11.Name = "Column11";
+            this.Column11.Width = 90;
             // 
             // Form1
             // 
@@ -404,8 +633,8 @@ namespace JournalOfElectricityMeteringDevices
             this.panelSettings.ResumeLayout(false);
             this.panelSQL.ResumeLayout(false);
             this.panelSQL.PerformLayout();
-            this.panelImport.ResumeLayout(false);
-            this.panelImport.PerformLayout();
+            this.panelChoice.ResumeLayout(false);
+            this.panelChoice.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -435,11 +664,29 @@ namespace JournalOfElectricityMeteringDevices
         private System.Windows.Forms.PictureBox pictureBlue;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label labelOptions;
-        private System.Windows.Forms.Button buttonImportFile;
-        private System.Windows.Forms.Panel panelImport;
-        private System.Windows.Forms.ComboBox cboSheet;
-        private System.Windows.Forms.TextBox txtFilename;
-        private System.Windows.Forms.Button buttonBrows;
+        private System.Windows.Forms.Button buttonCoosingMagazine;
+        private System.Windows.Forms.Panel panelChoice;
+        private System.Windows.Forms.ComboBox cboChoice;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.TextBox textBoxDeleteJ;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textAddJ;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button buttonChoice;
+        private System.Windows.Forms.OpenFileDialog openFD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
     }
 }
 

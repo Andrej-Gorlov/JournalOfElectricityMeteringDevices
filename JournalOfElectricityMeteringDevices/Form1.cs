@@ -14,6 +14,8 @@ using System.Diagnostics;
 using System.Threading;
 using Excel = Microsoft.Office.Interop.Excel;
 using ExcelDataReader;
+using Microsoft.Office.Interop.Excel;
+using Point = System.Drawing.Point;
 
 namespace JournalOfElectricityMeteringDevices
 {
@@ -22,7 +24,6 @@ namespace JournalOfElectricityMeteringDevices
         private SqlConnection connection = null;
         private SqlDataAdapter dataAdapter = null;
         private DataSet dataSet = null;
-        private DataTableCollection tableCollection;
 
         Lazy<Curtain> curtain = new Lazy<Curtain>();
         Lazy<AppearancesCollor> appearancesCollor = new Lazy<AppearancesCollor>();
@@ -54,29 +55,31 @@ namespace JournalOfElectricityMeteringDevices
 
             panelSQL.Size = new Size { Width = 1121, Height = 50 };
             panelSQL.Location = new Point { X = 69, Y = 712 };
-            panelBackground.Location = new Point { X=buttonChangeBackground.Location.X+199, Y = panelSettings.Location.Y+17};
-            panelImport.Location = new Point { X = buttonImportExcel.Location.X + 199, Y = panelSettings.Location.Y + 360 };
+            panelBackground.Location = new Point { X=buttonChangeBackground.Location.X+199, Y = panelSettings.Location.Y};
+            panelChoice.Location = new Point { X = buttonImportExcel.Location.X + 199, Y = panelSettings.Location.Y + 360 };
 
             buttonChangeBackground.Visible = false;
             buttonExportExcel.Visible = false;
             buttonImportExcel.Visible = false;
+            buttonChoice.Visible = false;
             panelBackground.Visible = false;
-            panelImport.Visible = false;
+            panelChoice.Visible = false;
 
             labelCommandSelest.MouseEnter += (s, a) => { labelCommandSelest.ForeColor = Color.FromName("MediumAquamarine"); };
             labelCommandSelest.MouseLeave += (s, a) => { labelCommandSelest.ForeColor = Color.Black; };
 
             buttonChangeBackground.Click += (s, a) =>{ panelBackground.Visible = true;};
-            buttonImportExcel.Click += (s, a) => { panelImport.Visible = true; };
-            dataGridView1.MouseEnter += (s, a) => { panelBackground.Visible = false; panelImport.Visible = false; };
-            panelSettings.MouseEnter += (s, a) => { panelBackground.Visible = false; panelImport.Visible = false; };
+            buttonChoice.Click += (s, a) => { panelChoice.Visible = true; };
+            dataGridView1.MouseEnter += (s, a) => { panelBackground.Visible = false; panelChoice.Visible = false; };
+            panelSettings.MouseEnter += (s, a) => { panelBackground.Visible = false; panelChoice.Visible = false; };
 
-            cboSheet.SelectedIndexChanged += (s, a) =>
-            {
-                DataTable dt = tableCollection[cboSheet.SelectedIndex.ToString()];
-                dataGridView1.DataSource = dt;
-            };
-            turnControl.Value.TurnLebel(labelOptions, -90, "MediumSeaGreen");
+            //cboSheet.SelectedIndexChanged += (s, a) =>
+            //{
+            //    DataTable dt = tableCollection[cboSheet.SelectedIndex.ToString()];
+            //    dataGridView1.DataSource = dt;
+            //};
+
+            turnControl.Value.TurnLebel(labelOptions, 270, "MediumSeaGreen");
             СhangeColor("MediumSeaGreen", "MediumAquamarine");
 
             Parallel.Invoke(
@@ -142,24 +145,23 @@ namespace JournalOfElectricityMeteringDevices
                             {
                                 labelOptions.Visible = false;
                                 curtain.Value.OpenLeft(panelSettings, -1, 2, 2);
-                                buttonChangeBackground.Visible = false;
-                                buttonExportExcel.Visible = false;
-                                buttonImportExcel.Visible = false;
                                 if (ColorB==true)
                                 {
                                     byte[] foreColorInitia = { 60, 180, 113 };
                                     byte[] foreColorFina = { 0, 0, 0 };
-                                    appearancesCollor.Value.ForeColorAppearances(buttonChangeBackground, foreColorInitia, foreColorFina, 3, 9, 5, 50, 250);
-                                    appearancesCollor.Value.ForeColorAppearances(buttonExportExcel, foreColorInitia, foreColorFina, 3, 9, 5, 50, 150);
-                                    appearancesCollor.Value.ForeColorAppearances(buttonImportExcel, foreColorInitia, foreColorFina, 3, 9, 5, 50, 50);
+                                    appearancesCollor.Value.ForeColorAppearances(buttonChangeBackground, foreColorInitia, foreColorFina, 3, 9, 5, 50, 350);
+                                    appearancesCollor.Value.ForeColorAppearances(buttonExportExcel, foreColorInitia, foreColorFina, 3, 9, 5, 50, 250);
+                                    appearancesCollor.Value.ForeColorAppearances(buttonImportExcel, foreColorInitia, foreColorFina, 3, 9, 5, 50, 150);
+                                    appearancesCollor.Value.ForeColorAppearances(buttonChoice, foreColorInitia, foreColorFina, 3, 9, 5, 50, 50);
                                 }
                                 else if (ColorB==false)
                                 {
                                     byte[] foreColorInitia = { 153, 180, 209 };
                                     byte[] foreColorFina = { 0, 0, 0 };
-                                    appearancesCollor.Value.ForeColorAppearances(buttonChangeBackground, foreColorInitia, foreColorFina, 7, 9, 10, 50, 250);
-                                    appearancesCollor.Value.ForeColorAppearances(buttonExportExcel, foreColorInitia, foreColorFina, 7, 9, 10, 50, 150);
-                                    appearancesCollor.Value.ForeColorAppearances(buttonImportExcel, foreColorInitia, foreColorFina, 7, 9, 10, 50, 50);
+                                    appearancesCollor.Value.ForeColorAppearances(buttonChangeBackground, foreColorInitia, foreColorFina, 7, 9, 10, 50, 350);
+                                    appearancesCollor.Value.ForeColorAppearances(buttonExportExcel, foreColorInitia, foreColorFina, 7, 9, 10, 50, 250);
+                                    appearancesCollor.Value.ForeColorAppearances(buttonImportExcel, foreColorInitia, foreColorFina, 7, 9, 10, 50, 150);
+                                    appearancesCollor.Value.ForeColorAppearances(buttonChoice, foreColorInitia, foreColorFina, 7, 9, 10, 50, 50);
                                 }
                                 CanOpenCurtain = false;
                             }
@@ -171,6 +173,7 @@ namespace JournalOfElectricityMeteringDevices
                             buttonChangeBackground.Visible = false;
                             buttonExportExcel.Visible = false;
                             buttonImportExcel.Visible = false;
+                            buttonChoice.Visible = false;
                             curtain.Value.CloseRight(panelSettings, -250, 15);
 
                             labelOptions.Visible = true;
@@ -185,6 +188,7 @@ namespace JournalOfElectricityMeteringDevices
                             buttonChangeBackground.Visible = false;
                             buttonExportExcel.Visible = false;
                             buttonImportExcel.Visible = false;
+                            buttonChoice.Visible = false;
                             curtain.Value.CloseRight(panelSettings, -250, 15);
 
                             labelOptions.Visible = true;
@@ -265,14 +269,16 @@ namespace JournalOfElectricityMeteringDevices
             ColorB = false;
             СhangeColor("ActiveCaption", "GradientInactiveCaption");
             panelBackground.Visible = false;
-            labelOptions.BackColor = Color.FromName("ActiveCaption");// не меняет цвет фона
+            turnControl.Value.TurnLebel(labelOptions, 180, "ActiveCaption");// если указать 360 градусов,то результат будет некорректный
+            turnControl.Value.TurnLebel(labelOptions, 180, "ActiveCaption");// если указать 360 градусов,то результат будет некорректный
         }
         private void pictureBox3_Click(object sender, EventArgs e)
         {
             ColorB = true;
             СhangeColor("MediumSeaGreen", "MediumAquamarine");
             panelBackground.Visible = false;
-            labelOptions.BackColor = Color.FromName("MediumSeaGreen");// не меняет цвет фона
+            turnControl.Value.TurnLebel(labelOptions, 180, "MediumSeaGreen");// если указать 360 градусов,то результат будет некорректный
+            turnControl.Value.TurnLebel(labelOptions, 180, "MediumSeaGreen");// если указать 360 градусов,то результат будет некорректный
         }
         private void СhangeColor(string mainColor, string secondaryColor)
         {
@@ -282,6 +288,9 @@ namespace JournalOfElectricityMeteringDevices
             panelBackground.BackColor = Color.FromName(mainColor);
             panelSettings.BackColor = Color.FromName(mainColor);
             panelSQL.BackColor = Color.FromName(mainColor);
+            textAddJ.BackColor = Color.FromName(secondaryColor);
+            textBoxDeleteJ.BackColor = Color.FromName(secondaryColor);
+            cboChoice.BackColor = Color.FromName(secondaryColor);
 
             //buttonChangeBackground.MouseEnter += (s, a) => { buttonChangeBackground.BackColor = Color.FromName("GradientInactiveCaption"); };
             //buttonExportExcel.MouseEnter += (s, a) => { buttonExportExcel.BackColor = Color.FromName("GradientInactiveCaption"); };
@@ -301,31 +310,43 @@ namespace JournalOfElectricityMeteringDevices
             backgroundColor.Value.AskColor(panelBackground);
             backgroundColor.Value.AskColor(pictureBlue);
             backgroundColor.Value.AskColor(pictureBox3);
-            backgroundColor.Value.AskColor(panelImport);
+            backgroundColor.Value.AskColor(panelChoice);
         }
-        private void buttonBrows_Click(object sender, EventArgs e)
+
+        private void buttonImportExcel_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "Excel 97-2003 Workbook|*.xls|Excel Workbook|*.xlsx" })
+            Microsoft.Office.Interop.Excel.Application xlApp;
+            Microsoft.Office.Interop.Excel.Workbook xlWorkbook;
+            Microsoft.Office.Interop.Excel.Worksheet xlWorksheet;
+            Microsoft.Office.Interop.Excel.Range xlRange;
+            int xlRow;
+            string strFileName;
+            openFD.Filter = "Excel Office|*.xls; *xlsx";
+            openFD.ShowDialog();
+            strFileName = openFD.FileName;
+            if (strFileName!="")
             {
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                xlApp = new Microsoft.Office.Interop.Excel.Application();
+                xlWorkbook = xlApp.Workbooks.Open(strFileName);
+                xlWorksheet = xlWorkbook.Worksheets["Лист1"];
+                xlRange = xlWorksheet.UsedRange;
+                int i = 0;
+                for (xlRow = 2; xlRow<= xlRange.Rows.Count; xlRow++)
                 {
-                    txtFilename.Text = openFileDialog.FileName;
-                    using (var stream = File.Open(openFileDialog.FileName, FileMode.Open, FileAccess.Read))
+                    if (xlRange.Cells[xlRow,1].Text!="")
                     {
-                        using (IExcelDataReader reader = ExcelReaderFactory.CreateReader(stream))
-                        {
-                            DataSet result = reader.AsDataSet(new ExcelDataSetConfiguration()
-                            {
-                                ConfigureDataTable = (_) => new ExcelDataTableConfiguration() { UseHeaderRow = true }
-                            });
-                            tableCollection = result.Tables;
-                            cboSheet.Items.Clear();
-                            foreach (DataTable item in tableCollection)
-                                cboSheet.Items.Add(item.TableName);
-                        }
+                        i++;
+                        dataGridView1.Rows.Add(i, xlRange.Cells[xlRow, 1].Text, xlRange.Cells[xlRow, 2].Text,
+                            xlRange.Cells[xlRow, 3].Text, xlRange.Cells[xlRow, 4].Text, xlRange.Cells[xlRow, 5].Text,
+                            xlRange.Cells[xlRow, 6].Text, xlRange.Cells[xlRow, 7].Text, xlRange.Cells[xlRow, 8].Text,
+                            xlRange.Cells[xlRow, 9].Text, xlRange.Cells[xlRow, 10].Text, xlRange.Cells[xlRow, 11].Text);
                     }
                 }
+                xlWorkbook.Close();
+                xlApp.Quit();
             }
+
+
         }
     }
 }
