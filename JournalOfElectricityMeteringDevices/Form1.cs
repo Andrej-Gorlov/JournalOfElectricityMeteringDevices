@@ -29,6 +29,10 @@ namespace JournalOfElectricityMeteringDevices
         Lazy<AppearancesCollor> appearancesCollor = new Lazy<AppearancesCollor>();
         Lazy<BackgroundColor> backgroundColor = new Lazy<BackgroundColor>();
         Lazy<TurnControl> turnControl = new Lazy<TurnControl>();
+        Lazy<CallingTable> callingTable = new Lazy<CallingTable>();
+        Lazy<SaveTableData> saveTable = new Lazy<SaveTableData>();
+        Lazy<ImportExcelFile> importExcel = new Lazy<ImportExcelFile>();
+        Lazy<ExportExcelFile> ExcelFile = new Lazy<ExportExcelFile>();
 
         Process processOpenFiel;
 
@@ -38,14 +42,21 @@ namespace JournalOfElectricityMeteringDevices
         public Form1()
         {
             InitializeComponent();
+
+            callingTable.Value.Calling(dataGridView1, connection, "September2021");// настроить имя таблицы!
+
+            labelCommandSelest.MouseEnter += (s, a) => { labelCommandSelest.ForeColor = Color.FromName("MediumAquamarine"); };
+            labelCommandSelest.MouseLeave += (s, a) => { labelCommandSelest.ForeColor = Color.Black; };
+
+            buttonChangeBackground.Click += (s, a) => { panelBackground.Visible = true; };
+
+            buttonChoice.Click += (s, a) => { panelChoic.Visible = true; };
+
+            dataGridView1.MouseEnter += (s, a) => { panelBackground.Visible = false; panelChoic.Visible = false; };
+            panelSettings.MouseEnter += (s, a) => { panelBackground.Visible = false; panelChoic.Visible = false; };
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            connection = new SqlConnection(ConfigurationManager.ConnectionStrings["LMD"].ConnectionString);
-            connection.Open();
-
-            labelOptions.Location = new Point { X=panelSettings.Location.X+260, Y = panelSettings.Location.Y +  200 };
-
             pictureBox1.Image = Properties.Resources.GorelektrosetNew;
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBlue.Image = Properties.Resources.blue;
@@ -53,31 +64,19 @@ namespace JournalOfElectricityMeteringDevices
             pictureBox3.Image = Properties.Resources.gren;
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
 
+            labelOptions.Location = new Point { X = panelSettings.Location.X + 260, Y = panelSettings.Location.Y + 200 };
             panelSQL.Size = new Size { Width = 1121, Height = 50 };
             panelSQL.Location = new Point { X = 69, Y = 712 };
             panelBackground.Location = new Point { X=buttonChangeBackground.Location.X+199, Y = panelSettings.Location.Y};
-            panelChoice.Location = new Point { X = buttonImportExcel.Location.X + 199, Y = panelSettings.Location.Y + 360 };
+            panelChoic.Location = new Point { X = buttonImportExcel.Location.X + 199, Y = panelSettings.Location.Y + 360 };
 
             buttonChangeBackground.Visible = false;
             buttonExportExcel.Visible = false;
             buttonImportExcel.Visible = false;
             buttonChoice.Visible = false;
+            buttonSave.Visible = false;
             panelBackground.Visible = false;
-            panelChoice.Visible = false;
-
-            labelCommandSelest.MouseEnter += (s, a) => { labelCommandSelest.ForeColor = Color.FromName("MediumAquamarine"); };
-            labelCommandSelest.MouseLeave += (s, a) => { labelCommandSelest.ForeColor = Color.Black; };
-
-            buttonChangeBackground.Click += (s, a) =>{ panelBackground.Visible = true;};
-            buttonChoice.Click += (s, a) => { panelChoice.Visible = true; };
-            dataGridView1.MouseEnter += (s, a) => { panelBackground.Visible = false; panelChoice.Visible = false; };
-            panelSettings.MouseEnter += (s, a) => { panelBackground.Visible = false; panelChoice.Visible = false; };
-
-            //cboSheet.SelectedIndexChanged += (s, a) =>
-            //{
-            //    DataTable dt = tableCollection[cboSheet.SelectedIndex.ToString()];
-            //    dataGridView1.DataSource = dt;
-            //};
+            panelChoic.Visible = false;
 
             turnControl.Value.TurnLebel(labelOptions, 270, "MediumSeaGreen");
             СhangeColor("MediumSeaGreen", "MediumAquamarine");
@@ -242,27 +241,7 @@ namespace JournalOfElectricityMeteringDevices
         }
         private void buttonExportExcel_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (dataGridView1.Rows.Count > 0)
-                {
-                    Excel.Application application = new Excel.Application();
-                    application.Application.Workbooks.Add(Type.Missing);
-                    for (int i = 1; i < dataGridView1.Columns.Count + 1; i++)
-                        application.Cells[1, i] = dataGridView1.Columns[i - 1].HeaderText;
-                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                    {
-                        for (int j = 0; j < dataGridView1.Columns.Count; j++)
-                            application.Cells[i + 2, j + 1] = dataGridView1.Rows[i].Cells[j].Value;
-                    }
-                    application.Columns.AutoFit();
-                    application.Visible = true;
-                }
-            }
-            catch (Exception isk)
-            {
-                MessageBox.Show(isk.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            ExcelFile.Value.Export(dataGridView1);
         }
         private void pictureBox2_Click(object sender, EventArgs e)
         {
@@ -288,9 +267,11 @@ namespace JournalOfElectricityMeteringDevices
             panelBackground.BackColor = Color.FromName(mainColor);
             panelSettings.BackColor = Color.FromName(mainColor);
             panelSQL.BackColor = Color.FromName(mainColor);
+            comboBoxV.BackColor= Color.FromName(secondaryColor);
             textAddJ.BackColor = Color.FromName(secondaryColor);
             textBoxDeleteJ.BackColor = Color.FromName(secondaryColor);
-            cboChoice.BackColor = Color.FromName(secondaryColor);
+            panelChoic.BackColor = Color.FromName(mainColor);
+            dataGridView1.GridColor=Color.FromName(secondaryColor);
 
             //buttonChangeBackground.MouseEnter += (s, a) => { buttonChangeBackground.BackColor = Color.FromName("GradientInactiveCaption"); };
             //buttonExportExcel.MouseEnter += (s, a) => { buttonExportExcel.BackColor = Color.FromName("GradientInactiveCaption"); };
@@ -310,43 +291,29 @@ namespace JournalOfElectricityMeteringDevices
             backgroundColor.Value.AskColor(panelBackground);
             backgroundColor.Value.AskColor(pictureBlue);
             backgroundColor.Value.AskColor(pictureBox3);
-            backgroundColor.Value.AskColor(panelChoice);
+            backgroundColor.Value.AskColor(panelChoic);
         }
-
         private void buttonImportExcel_Click(object sender, EventArgs e)
         {
-            Microsoft.Office.Interop.Excel.Application xlApp;
-            Microsoft.Office.Interop.Excel.Workbook xlWorkbook;
-            Microsoft.Office.Interop.Excel.Worksheet xlWorksheet;
-            Microsoft.Office.Interop.Excel.Range xlRange;
-            int xlRow;
-            string strFileName;
-            openFD.Filter = "Excel Office|*.xls; *xlsx";
-            openFD.ShowDialog();
-            strFileName = openFD.FileName;
-            if (strFileName!="")
+            importExcel.Value.Import(dataGridView1, openFD);
+
+            if (ColorB == true)
             {
-                xlApp = new Microsoft.Office.Interop.Excel.Application();
-                xlWorkbook = xlApp.Workbooks.Open(strFileName);
-                xlWorksheet = xlWorkbook.Worksheets["Лист1"];
-                xlRange = xlWorksheet.UsedRange;
-                int i = 0;
-                for (xlRow = 2; xlRow<= xlRange.Rows.Count; xlRow++)
-                {
-                    if (xlRange.Cells[xlRow,1].Text!="")
-                    {
-                        i++;
-                        dataGridView1.Rows.Add(i, xlRange.Cells[xlRow, 1].Text, xlRange.Cells[xlRow, 2].Text,
-                            xlRange.Cells[xlRow, 3].Text, xlRange.Cells[xlRow, 4].Text, xlRange.Cells[xlRow, 5].Text,
-                            xlRange.Cells[xlRow, 6].Text, xlRange.Cells[xlRow, 7].Text, xlRange.Cells[xlRow, 8].Text,
-                            xlRange.Cells[xlRow, 9].Text, xlRange.Cells[xlRow, 10].Text, xlRange.Cells[xlRow, 11].Text);
-                    }
-                }
-                xlWorkbook.Close();
-                xlApp.Quit();
+                byte[] foreColorInitia = { 60, 180, 113 };
+                byte[] foreColorFina = { 0, 0, 0 };
+                appearancesCollor.Value.ForeColorAppearances(buttonSave, foreColorInitia, foreColorFina, 3, 9, 5, 50);
             }
-
-
+            else if (ColorB == false)
+            {
+                byte[] foreColorInitia = { 153, 180, 209 };
+                byte[] foreColorFina = { 0, 0, 0 };
+                appearancesCollor.Value.ForeColorAppearances(buttonSave, foreColorInitia, foreColorFina, 7, 9, 10, 50);
+            }
+        }
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            saveTable.Value.Save(dataGridView1, connection, "September2021");
+            buttonSave.Visible = false;
         }
     }
 }
