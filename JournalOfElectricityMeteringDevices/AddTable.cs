@@ -14,7 +14,7 @@ namespace JournalOfElectricityMeteringDevices
     {
         private SqlDataAdapter dataAdapter = null;
         private DataSet dataSet = null;
-        SqlConnection connection = null;
+        private SqlConnection connection = null;
         public void СreateTable(string nameTable)
         {
             try

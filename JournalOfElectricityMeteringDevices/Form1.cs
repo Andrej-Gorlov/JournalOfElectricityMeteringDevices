@@ -17,13 +17,16 @@ using ExcelDataReader;
 using Microsoft.Office.Interop.Excel;
 using Point = System.Drawing.Point;
 
+using System.Data.OleDb;
+using System.Data.Odbc;
+
 namespace JournalOfElectricityMeteringDevices
 {
     public partial class Form1 : Form
     {
-        private SqlConnection connection = null;
-        private SqlDataAdapter dataAdapter = null;
-        private DataSet dataSet = null;
+        //private SqlConnection connection = null;
+        //private SqlDataAdapter dataAdapter = null;
+        //private DataSet dataSet = null;
 
         Lazy<Curtain> curtain = new Lazy<Curtain>();
         Lazy<AppearancesCollor> appearancesCollor = new Lazy<AppearancesCollor>();
@@ -35,8 +38,12 @@ namespace JournalOfElectricityMeteringDevices
         Lazy<ExportExcelFile> ExcelFile = new Lazy<ExportExcelFile>();
         Lazy<AddTable> addTable = new Lazy<AddTable>();
         Lazy<DeletTable> deletTable = new Lazy<DeletTable>();
+        Lazy<SELECT> select = new Lazy<SELECT>();
+        Lazy<ListTables> listTables = new Lazy<ListTables>();
 
         Process processOpenFiel;
+        
+        string strNameTable { get; set; }
 
         bool CanOpenCurtain = true;
         bool ColorB = true;
@@ -45,8 +52,6 @@ namespace JournalOfElectricityMeteringDevices
         public Form1()
         {
             InitializeComponent();
-
-            callingTable.Value.Calling(dataGridView1, "September2021");// настроить имя таблицы!
 
             labelCommandSelest.MouseEnter += (s, a) => { labelCommandSelest.ForeColor = Color.FromName("MediumAquamarine"); };
             labelCommandSelest.MouseLeave += (s, a) => { labelCommandSelest.ForeColor = Color.Black; };
@@ -58,6 +63,7 @@ namespace JournalOfElectricityMeteringDevices
                 if (BSearch == true) { panelSearch.Visible = true; BSearch = false; }
                 else { panelSearch.Visible = false; BSearch = true; }
             };
+            comboBoxV.MouseClick += (s, a) => { listTables.Value.OpenList(comboBoxV); };
 
             dataGridView1.MouseEnter += (s, a) => { panelBackground.Visible = false; panelChoic.Visible = false; };
             panelSettings.MouseEnter += (s, a) => { panelBackground.Visible = false; panelChoic.Visible = false; };
@@ -235,22 +241,8 @@ namespace JournalOfElectricityMeteringDevices
         }
         private void buttonSelect_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (textBoxSELECT.Text != null)
-                {
-                    dataAdapter = new SqlDataAdapter(textBoxSELECT.Text, connection);
-                    dataSet = new DataSet();
-                    dataAdapter.Fill(dataSet);
-                    dataGridView1.DataSource = dataSet.Tables[0];
-                }
-                else
-                    MessageBox.Show("Введите запрос");
-            }
-            catch (Exception isk)
-            {
-                MessageBox.Show(isk.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            string selec = textBoxSELECT.Text;
+            select.Value.Inquiry(dataGridView1,selec);
         }
         private void buttonExportExcel_Click(object sender, EventArgs e)
         {
@@ -329,7 +321,7 @@ namespace JournalOfElectricityMeteringDevices
         }
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            saveTable.Value.Save(dataGridView1, "September2021");// НАСТРОИТЬ ИМЯ ТАБЛИЦЫ 
+            saveTable.Value.Save(dataGridView1, strNameTable);
             buttonSave.Visible = false;
         }
         private void button3_Click(object sender, EventArgs e)
@@ -337,14 +329,17 @@ namespace JournalOfElectricityMeteringDevices
             string nameTable = textAddJ.Text;
             addTable.Value.СreateTable(nameTable);
             textAddJ.Clear();
-            //comboBoxV.Items.Remove(textAddJ.Text);
         }
-
         private void buttonDeleteTable_Click(object sender, EventArgs e)
         {
             string nameTable = textBoxDeleteJ.Text;
             deletTable.Value.EraseTable(nameTable);
             textBoxDeleteJ.Clear();
+        }
+        private void button4_Click(object sender, EventArgs e)//изменить названия кнопки
+        {
+            string nameTable = strNameTable= comboBoxV.Text;
+            callingTable.Value.Calling(dataGridView1, nameTable);
         }
     }
 }
