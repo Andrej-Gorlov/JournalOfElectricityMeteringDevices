@@ -12,9 +12,10 @@ namespace JournalOfElectricityMeteringDevices
     class SaveTableData
     {
         private SqlCommand command = null;
+        SqlConnection connection = null;
 
         Lazy<CallingTable> callingTable = new Lazy<CallingTable>();
-        public void Save(System.Windows.Forms.DataGridView gridView, SqlConnection connection,string nameTable)
+        public void Save(System.Windows.Forms.DataGridView gridView, string nameTable)
         {
             try
             {
@@ -41,7 +42,7 @@ namespace JournalOfElectricityMeteringDevices
                     connection.Close();
                 }
                 MessageBox.Show("Сохранение произошло", "Сообщение", MessageBoxButtons.OK);
-                callingTable.Value.Calling(gridView, connection, nameTable);
+                callingTable.Value.Calling(gridView, nameTable);
             }
             catch (Exception isk)
             {

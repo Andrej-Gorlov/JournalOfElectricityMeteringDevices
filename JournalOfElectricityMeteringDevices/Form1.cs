@@ -33,27 +33,35 @@ namespace JournalOfElectricityMeteringDevices
         Lazy<SaveTableData> saveTable = new Lazy<SaveTableData>();
         Lazy<ImportExcelFile> importExcel = new Lazy<ImportExcelFile>();
         Lazy<ExportExcelFile> ExcelFile = new Lazy<ExportExcelFile>();
+        Lazy<AddTable> addTable = new Lazy<AddTable>();
+        Lazy<DeletTable> deletTable = new Lazy<DeletTable>();
 
         Process processOpenFiel;
 
         bool CanOpenCurtain = true;
         bool ColorB = true;
+        bool BSearch = true; 
 
         public Form1()
         {
             InitializeComponent();
 
-            callingTable.Value.Calling(dataGridView1, connection, "September2021");// настроить имя таблицы!
+            callingTable.Value.Calling(dataGridView1, "September2021");// настроить имя таблицы!
 
             labelCommandSelest.MouseEnter += (s, a) => { labelCommandSelest.ForeColor = Color.FromName("MediumAquamarine"); };
             labelCommandSelest.MouseLeave += (s, a) => { labelCommandSelest.ForeColor = Color.Black; };
 
             buttonChangeBackground.Click += (s, a) => { panelBackground.Visible = true; };
-
             buttonChoice.Click += (s, a) => { panelChoic.Visible = true; };
+            pictureBoxSearch.Click += (s, a) => 
+            {
+                if (BSearch == true) { panelSearch.Visible = true; BSearch = false; }
+                else { panelSearch.Visible = false; BSearch = true; }
+            };
 
             dataGridView1.MouseEnter += (s, a) => { panelBackground.Visible = false; panelChoic.Visible = false; };
             panelSettings.MouseEnter += (s, a) => { panelBackground.Visible = false; panelChoic.Visible = false; };
+
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -63,6 +71,8 @@ namespace JournalOfElectricityMeteringDevices
             pictureBlue.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.Image = Properties.Resources.gren;
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBoxSearch.Image = Properties.Resources.pngSearch2;
+            pictureBoxSearch.SizeMode = PictureBoxSizeMode.StretchImage;
 
             labelOptions.Location = new Point { X = panelSettings.Location.X + 260, Y = panelSettings.Location.Y + 200 };
             panelSQL.Size = new Size { Width = 1121, Height = 50 };
@@ -77,6 +87,9 @@ namespace JournalOfElectricityMeteringDevices
             buttonSave.Visible = false;
             panelBackground.Visible = false;
             panelChoic.Visible = false;
+            panelSearch.Visible = false;
+
+            comboBoxSearch.SelectedIndex = 1;
 
             turnControl.Value.TurnLebel(labelOptions, 270, "MediumSeaGreen");
             СhangeColor("MediumSeaGreen", "MediumAquamarine");
@@ -263,6 +276,7 @@ namespace JournalOfElectricityMeteringDevices
         {
             panel1.BackColor = Color.FromName(mainColor);
             dataGridView1.BackgroundColor = Color.FromName(secondaryColor);
+            dataGridView1.GridColor = Color.FromName(secondaryColor);
             textBoxSELECT.BackColor = Color.FromName(secondaryColor);
             panelBackground.BackColor = Color.FromName(mainColor);
             panelSettings.BackColor = Color.FromName(mainColor);
@@ -271,7 +285,9 @@ namespace JournalOfElectricityMeteringDevices
             textAddJ.BackColor = Color.FromName(secondaryColor);
             textBoxDeleteJ.BackColor = Color.FromName(secondaryColor);
             panelChoic.BackColor = Color.FromName(mainColor);
-            dataGridView1.GridColor=Color.FromName(secondaryColor);
+            panelSearch.BackColor = Color.FromName(mainColor);
+            comboBoxSearch.BackColor= Color.FromName(secondaryColor);
+            textBoxSearch.BackColor= Color.FromName(secondaryColor);
 
             //buttonChangeBackground.MouseEnter += (s, a) => { buttonChangeBackground.BackColor = Color.FromName("GradientInactiveCaption"); };
             //buttonExportExcel.MouseEnter += (s, a) => { buttonExportExcel.BackColor = Color.FromName("GradientInactiveCaption"); };
@@ -292,6 +308,7 @@ namespace JournalOfElectricityMeteringDevices
             backgroundColor.Value.AskColor(pictureBlue);
             backgroundColor.Value.AskColor(pictureBox3);
             backgroundColor.Value.AskColor(panelChoic);
+            backgroundColor.Value.AskColor(panelSearch);
         }
         private void buttonImportExcel_Click(object sender, EventArgs e)
         {
@@ -312,8 +329,22 @@ namespace JournalOfElectricityMeteringDevices
         }
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            saveTable.Value.Save(dataGridView1, connection, "September2021");
+            saveTable.Value.Save(dataGridView1, "September2021");// НАСТРОИТЬ ИМЯ ТАБЛИЦЫ 
             buttonSave.Visible = false;
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string nameTable = textAddJ.Text;
+            addTable.Value.СreateTable(nameTable);
+            textAddJ.Clear();
+            //comboBoxV.Items.Remove(textAddJ.Text);
+        }
+
+        private void buttonDeleteTable_Click(object sender, EventArgs e)
+        {
+            string nameTable = textBoxDeleteJ.Text;
+            deletTable.Value.EraseTable(nameTable);
+            textBoxDeleteJ.Clear();
         }
     }
 }

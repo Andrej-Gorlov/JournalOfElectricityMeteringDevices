@@ -13,7 +13,8 @@ namespace JournalOfElectricityMeteringDevices
     {
         private SqlCommand command = null;
         private SqlDataReader reader = null;
-        public void Calling(System.Windows.Forms.DataGridView dataGridView, SqlConnection connection, string nameBD)
+        SqlConnection connection = null;
+        public void Calling(System.Windows.Forms.DataGridView dataGridView, string nameBD)
         {
             connection = new SqlConnection(ConfigurationManager.ConnectionStrings["LMD"].ConnectionString);
             connection.Open();
