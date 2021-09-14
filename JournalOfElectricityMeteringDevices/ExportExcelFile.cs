@@ -10,7 +10,7 @@ namespace JournalOfElectricityMeteringDevices
 {
     class ExportExcelFile
     {
-        public void Export(System.Windows.Forms.DataGridView gridView)
+        public void Export(DataGridView gridView)
         {
             try
             {

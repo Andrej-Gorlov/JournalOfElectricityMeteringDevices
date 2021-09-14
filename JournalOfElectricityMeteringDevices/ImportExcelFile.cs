@@ -9,7 +9,7 @@ namespace JournalOfElectricityMeteringDevices
 {
     class ImportExcelFile
     {
-        public void Import(System.Windows.Forms.DataGridView gridView, System.Windows.Forms.OpenFileDialog openFile )
+        public void Import(DataGridView gridView, OpenFileDialog openFile )
         {
             try
             {

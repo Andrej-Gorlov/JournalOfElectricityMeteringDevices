@@ -78,6 +78,7 @@
       <DependentUpon>Background.cs</DependentUpon>
     </Compile>
     <Compile Include="BackgroundColor.cs" />
+    <Compile Include="ButtonBoundaryChanges.cs" />
     <Compile Include="CallingTable.cs" />
     <Compile Include="Curtain.cs" />
     <Compile Include="DeletTable.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaveTableData.cs" />
+    <Compile Include="SearchValues.cs" />
     <Compile Include="SELECT.cs" />
     <Compile Include="TurnControl.cs">
       <SubType>Component</SubType>
