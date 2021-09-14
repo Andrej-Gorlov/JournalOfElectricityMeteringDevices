@@ -88,7 +88,6 @@ namespace JournalOfElectricityMeteringDevices
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.openFD = new System.Windows.Forms.OpenFileDialog();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSearch)).BeginInit();
             this.panelChoic.SuspendLayout();
@@ -108,7 +107,6 @@ namespace JournalOfElectricityMeteringDevices
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.textBoxSearch);
             this.panel1.Controls.Add(this.pictureBoxSearch);
             this.panel1.Controls.Add(this.panelChoic);
@@ -675,16 +673,6 @@ namespace JournalOfElectricityMeteringDevices
             // 
             this.openFD.FileName = "openFD1";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(922, 14);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 36;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -762,7 +750,6 @@ namespace JournalOfElectricityMeteringDevices
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.Button button1;
     }
 }
 
