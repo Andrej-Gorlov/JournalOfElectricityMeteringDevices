@@ -1,0 +1,24 @@
+https://codernotes.ru/articles/c-c/upravlenie-odnoj-formoj-iz-drugoj.html
+
+
+комбобокс
+
+https://pyatnitsev.ru/2012/03/28/accesscombobox/
+
+
+
+
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+    </configSections>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
+    </startup>
+  <connectionStrings>
+    <add name="LMD" connectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\admin\Desktop\JournalOfElectricityMeteringDevices\JournalOfElectricityMeteringDevices\logMeteringDevices.mdf;Integrated Security=True" />
+    <add name="JournalOfElectricityMeteringDevices.Properties.Settings.logMeteringDevicesConnectionString"
+      connectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\logMeteringDevices.mdf;Integrated Security=True"
+      providerName="System.Data.SqlClient" />
+  </connectionStrings>
+</configuration>

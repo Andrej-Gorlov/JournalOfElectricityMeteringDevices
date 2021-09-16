@@ -56,43 +56,8 @@ namespace JournalOfElectricityMeteringDevices
 
             buttonChangeBackground.Click += (s, a) => { panelBackground.Visible = true; };
             buttonChoice.Click += (s, a) => { panelChoic.Visible = true; };
-            pictureBoxSearch.Click += (s, a) =>
-            {
-                if (BSearch == true) { textBoxSearch.Visible = true; BSearch = false; }
-                else { textBoxSearch.Visible = false; BSearch = true; }
-            };
             comboBoxV.MouseClick += (s, a) => { listTables.Value.OpenList(comboBoxV); };
-            labelClose.Click += (s, a) =>
-            {
-                if (MessageBox.Show("Вы действительно хотите выйти? ", "Закрытия приложения СНТ", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    System.Windows.Forms.Application.Exit();
-            };
             labelCollapse.Click += (s, a) => { this.WindowState = FormWindowState.Minimized; };
-            labelExpand.Click += (s, a) =>
-            {
-                if (SizeWindows == true)
-                {
-                    this.WindowState = FormWindowState.Maximized;
-                    SizeWindows = false;
-                }
-                else if (SizeWindows == false)
-                {
-                    WindowState = FormWindowState.Normal;
-                    this.Size = new Size(1264, 761);
-                    SizeWindows = true;
-                }
-
-            };
-
-            panel1.MouseMove += (s, a) =>
-            {
-                if (a.Button == MouseButtons.Left)
-                {
-                    this.Left += a.X - point.X;
-                    this.Top += a.Y - point.Y;
-                }
-            };
-            panel1.MouseDown += (s, a) => { point = new Point(a.X, a.Y); };
 
             dataGridView1.MouseEnter += (s, a) => { panelBackground.Visible = false; panelChoic.Visible = false; };
             panelSettings.MouseEnter += (s, a) => { panelBackground.Visible = false; panelChoic.Visible = false; };
@@ -128,124 +93,113 @@ namespace JournalOfElectricityMeteringDevices
             turnControl.Value.TurnLebel(labelOptions, 270, "MediumSeaGreen");
             СhangeColor("MediumSeaGreen", "MediumAquamarine");
 
-            Parallel.Invoke(
-                () =>
+            Enumerable.Range(0,1).AsParallel().ForAll(x =>
+            {
+                panelSQL.MouseEnter += (s, a) =>
                 {
-                    new Thread(() =>
+                    if (CanOpenCurtain == true)
                     {
-                        panelSQL.MouseEnter += (s, a) =>
+                        curtain.Value.OpenUp(dataGridView1, panelSQL);
+                        if (ColorB == true)
                         {
-                            if (CanOpenCurtain == true)
-                            {
-                                curtain.Value.OpenUp(dataGridView1, panelSQL);
-                                if (ColorB == true)
-                                {
-                                    byte[] backColorInitial = { 60, 179, 113 };
-                                    byte[] backColorFinal = { 102, 205, 170 };
-                                    byte[] foreColorInitial = { 60, 180, 113 };
-                                    byte[] foreColorFinal = { 0, 0, 0 };
-                                    appearancesCollor.Value.BackColorAppearances(textBoxSELECT, backColorInitial, backColorFinal, 2, 2, 4, 25, 250);
-                                    appearancesCollor.Value.ForeColorAppearances(labelCommandSelest, foreColorInitial, foreColorFinal, 3, 9, 5, 50, 350);
-                                    appearancesCollor.Value.ForeColorAppearances(buttonSelect, foreColorInitial, foreColorFinal, 3, 9, 5, 50, 350);
-                                }
-                                else if (ColorB == false)
-                                {
-                                    byte[] backColorInitial = { 153, 180, 209 };
-                                    byte[] backColorFinal = { 215, 228, 242 };
-                                    byte[] foreColorInitial = { 153, 180, 209 };
-                                    byte[] foreColorFinal = { 0, 0, 0 };
-                                    appearancesCollor.Value.BackColorAppearances(textBoxSELECT, backColorInitial, backColorFinal, 6, 5, 3, 25, 250);
-                                    appearancesCollor.Value.ForeColorAppearances(labelCommandSelest, foreColorInitial, foreColorFinal, 7, 9, 10, 50, 350);
-                                    appearancesCollor.Value.ForeColorAppearances(buttonSelect, foreColorInitial, foreColorFinal, 7, 9, 10, 50, 350);
-                                }
-                                CanOpenCurtain = false;
-                            }
-                        };
+                            byte[] backColorInitial = { 60, 179, 113 };
+                            byte[] backColorFinal = { 102, 205, 170 };
+                            byte[] foreColorInitial = { 60, 180, 113 };
+                            byte[] foreColorFinal = { 0, 0, 0 };
+                            appearancesCollor.Value.BackColorAppearances(textBoxSELECT, backColorInitial, backColorFinal, 2, 2, 4, 25, 250);
+                            appearancesCollor.Value.ForeColorAppearances(labelCommandSelest, foreColorInitial, foreColorFinal, 3, 9, 5, 50, 350);
+                            appearancesCollor.Value.ForeColorAppearances(buttonSelect, foreColorInitial, foreColorFinal, 3, 9, 5, 50, 350);
+                        }
+                        else if (ColorB == false)
+                        {
+                            byte[] backColorInitial = { 153, 180, 209 };
+                            byte[] backColorFinal = { 215, 228, 242 };
+                            byte[] foreColorInitial = { 153, 180, 209 };
+                            byte[] foreColorFinal = { 0, 0, 0 };
+                            appearancesCollor.Value.BackColorAppearances(textBoxSELECT, backColorInitial, backColorFinal, 6, 5, 3, 25, 250);
+                            appearancesCollor.Value.ForeColorAppearances(labelCommandSelest, foreColorInitial, foreColorFinal, 7, 9, 10, 50, 350);
+                            appearancesCollor.Value.ForeColorAppearances(buttonSelect, foreColorInitial, foreColorFinal, 7, 9, 10, 50, 350);
+                        }
+                        CanOpenCurtain = false;
+                    }
+                };
 
-                        panel1.MouseEnter += (a, s) =>
-                        {
-                            CanOpenCurtain = true;
-                            buttonSelect.Visible = false;
-                            labelCommandSelest.Visible = false;
-                            textBoxSELECT.Visible = false;
-                            curtain.Value.CloseDown(dataGridView1, panelSQL);
-                        };
-
-                        dataGridView1.MouseEnter += (a, s) =>
-                        {
-                            CanOpenCurtain = true;
-                            buttonSelect.Visible = false;
-                            labelCommandSelest.Visible = false;
-                            textBoxSELECT.Visible = false;
-                            curtain.Value.CloseDown(dataGridView1, panelSQL);
-                        };
-                    }).Start();
-                },
-                () =>
+                panel1.MouseEnter += (a, s) =>
                 {
-                    new Thread(() =>
+                    CanOpenCurtain = true;
+                    buttonSelect.Visible = false;
+                    labelCommandSelest.Visible = false;
+                    textBoxSELECT.Visible = false;
+                    curtain.Value.CloseDown(dataGridView1, panelSQL);
+                };
+
+                dataGridView1.MouseEnter += (a, s) =>
+                {
+                    CanOpenCurtain = true;
+                    buttonSelect.Visible = false;
+                    labelCommandSelest.Visible = false;
+                    textBoxSELECT.Visible = false;
+                    curtain.Value.CloseDown(dataGridView1, panelSQL);
+                };
+
+                panelSettings.MouseEnter += (s, a) =>
+                {
+                    if (CanOpenCurtain == true)
                     {
-                        panelSettings.MouseEnter += (s, a) =>
+                        labelOptions.Visible = false;
+                        curtain.Value.OpenLeft(panelSettings, -1, 2, 2);
+                        if (ColorB == true)
                         {
-                            if (CanOpenCurtain == true)
-                            {
-                                labelOptions.Visible = false;
-                                curtain.Value.OpenLeft(panelSettings, -1, 2, 2);
-                                if (ColorB == true)
-                                {
-                                    byte[] foreColorInitia = { 60, 180, 113 };
-                                    byte[] foreColorFina = { 0, 0, 0 };
-                                    appearancesCollor.Value.ForeColorAppearances(buttonChangeBackground, foreColorInitia, foreColorFina, 3, 9, 5, 50, 350);
-                                    appearancesCollor.Value.ForeColorAppearances(buttonExportExcel, foreColorInitia, foreColorFina, 3, 9, 5, 50, 250);
-                                    appearancesCollor.Value.ForeColorAppearances(buttonImportExcel, foreColorInitia, foreColorFina, 3, 9, 5, 50, 150);
-                                    appearancesCollor.Value.ForeColorAppearances(buttonChoice, foreColorInitia, foreColorFina, 3, 9, 5, 50, 50);
-                                }
-                                else if (ColorB == false)
-                                {
-                                    byte[] foreColorInitia = { 153, 180, 209 };
-                                    byte[] foreColorFina = { 0, 0, 0 };
-                                    appearancesCollor.Value.ForeColorAppearances(buttonChangeBackground, foreColorInitia, foreColorFina, 7, 9, 10, 50, 350);
-                                    appearancesCollor.Value.ForeColorAppearances(buttonExportExcel, foreColorInitia, foreColorFina, 7, 9, 10, 50, 250);
-                                    appearancesCollor.Value.ForeColorAppearances(buttonImportExcel, foreColorInitia, foreColorFina, 7, 9, 10, 50, 150);
-                                    appearancesCollor.Value.ForeColorAppearances(buttonChoice, foreColorInitia, foreColorFina, 7, 9, 10, 50, 50);
-                                }
-                                CanOpenCurtain = false;
-                            }
-                        };
-
-                        panel1.MouseEnter += (a, s) =>
+                            byte[] foreColorInitia = { 60, 180, 113 };
+                            byte[] foreColorFina = { 0, 0, 0 };
+                            appearancesCollor.Value.ForeColorAppearances(buttonChangeBackground, foreColorInitia, foreColorFina, 3, 9, 5, 50, 350);
+                            appearancesCollor.Value.ForeColorAppearances(buttonExportExcel, foreColorInitia, foreColorFina, 3, 9, 5, 50, 250);
+                            appearancesCollor.Value.ForeColorAppearances(buttonImportExcel, foreColorInitia, foreColorFina, 3, 9, 5, 50, 150);
+                            appearancesCollor.Value.ForeColorAppearances(buttonChoice, foreColorInitia, foreColorFina, 3, 9, 5, 50, 50);
+                        }
+                        else if (ColorB == false)
                         {
-                            CanOpenCurtain = true;
-                            buttonChangeBackground.Visible = false;
-                            buttonExportExcel.Visible = false;
-                            buttonImportExcel.Visible = false;
-                            buttonChoice.Visible = false;
-                            curtain.Value.CloseRight(panelSettings, -250, 15);
+                            byte[] foreColorInitia = { 153, 180, 209 };
+                            byte[] foreColorFina = { 0, 0, 0 };
+                            appearancesCollor.Value.ForeColorAppearances(buttonChangeBackground, foreColorInitia, foreColorFina, 7, 9, 10, 50, 350);
+                            appearancesCollor.Value.ForeColorAppearances(buttonExportExcel, foreColorInitia, foreColorFina, 7, 9, 10, 50, 250);
+                            appearancesCollor.Value.ForeColorAppearances(buttonImportExcel, foreColorInitia, foreColorFina, 7, 9, 10, 50, 150);
+                            appearancesCollor.Value.ForeColorAppearances(buttonChoice, foreColorInitia, foreColorFina, 7, 9, 10, 50, 50);
+                        }
+                        CanOpenCurtain = false;
+                    }
+                };
 
-                            labelOptions.Visible = true;
-                            //byte[] foreColorInitial = { 60, 180, 113 };
-                            //byte[] foreColorFinal = { 0, 0, 0 };
-                            //appearancesCollor.Value.ForeColorAppearances(labelOptions, foreColorInitial, foreColorFinal, 3, 9, 5, 70, 350);// не работает планое появление
-                        };
+                panel1.MouseEnter += (a, s) =>
+                {
+                    CanOpenCurtain = true;
+                    buttonChangeBackground.Visible = false;
+                    buttonExportExcel.Visible = false;
+                    buttonImportExcel.Visible = false;
+                    buttonChoice.Visible = false;
+                    curtain.Value.CloseRight(panelSettings, -250, 15);
 
-                        dataGridView1.MouseEnter += (a, s) =>
-                        {
-                            CanOpenCurtain = true;
-                            buttonChangeBackground.Visible = false;
-                            buttonExportExcel.Visible = false;
-                            buttonImportExcel.Visible = false;
-                            buttonChoice.Visible = false;
-                            curtain.Value.CloseRight(panelSettings, -250, 15);
+                    labelOptions.Visible = true;
+                    //byte[] foreColorInitial = { 60, 180, 113 };
+                    //byte[] foreColorFinal = { 0, 0, 0 };
+                    //appearancesCollor.Value.ForeColorAppearances(labelOptions, foreColorInitial, foreColorFinal, 3, 9, 5, 70, 350);// не работает планое появление
+                };
 
-                            labelOptions.Visible = true;
-                            //byte[] foreColorInitial = { 60, 180, 113 };
-                            //byte[] foreColorFinal = { 0, 0, 0 };
-                            //appearancesCollor.Value.ForeColorAppearances(labelOptions, foreColorInitial, foreColorFinal, 3, 9, 5, 70, 350);// не работает планое появление
-                        };
+                dataGridView1.MouseEnter += (a, s) =>
+                {
+                    CanOpenCurtain = true;
+                    buttonChangeBackground.Visible = false;
+                    buttonExportExcel.Visible = false;
+                    buttonImportExcel.Visible = false;
+                    buttonChoice.Visible = false;
+                    curtain.Value.CloseRight(panelSettings, -250, 15);
 
-                    }).Start();
-                }
-            );
+                    labelOptions.Visible = true;
+                    //byte[] foreColorInitial = { 60, 180, 113 };
+                    //byte[] foreColorFinal = { 0, 0, 0 };
+                    //appearancesCollor.Value.ForeColorAppearances(labelOptions, foreColorInitial, foreColorFinal, 3, 9, 5, 70, 350);// не работает планое появление
+                };
+            });
         }
         private async void labelCommandSelest_Click(object sender, EventArgs e)
         {
@@ -344,7 +298,7 @@ namespace JournalOfElectricityMeteringDevices
             backgroundColor.Value.AskColor(pictureBlue);
             backgroundColor.Value.AskColor(pictureBox3);
             backgroundColor.Value.AskColor(panelChoic);
-            backgroundColor.Value.AskColor(panel1);// при изминения размеров границ отстаются старые 
+            backgroundColor.Value.AskColor(panel1);// при изминения размеров границ, старые отстаются 
         }
         private void buttonImportExcel_Click(object sender, EventArgs e)
         {
@@ -384,6 +338,42 @@ namespace JournalOfElectricityMeteringDevices
             string nameTable = textAddJ.Text;
             new Thread(() => { addTable.Value.СreateTable(nameTable); }).Start();
             textAddJ.Clear();
+        }
+        private void pictureBoxSearch_Click(object sender, EventArgs e)
+        {
+            if (BSearch == true) { textBoxSearch.Visible = true; BSearch = false; }
+            else { textBoxSearch.Visible = false; BSearch = true; }
+        }
+        private void labelClose_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Вы действительно хотите выйти? ", "Закрытия приложения СНТ", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                System.Windows.Forms.Application.Exit();
+        }
+        private void labelExpand_Click(object sender, EventArgs e)
+        {
+            if (SizeWindows == true)
+            {
+                this.WindowState = FormWindowState.Maximized;
+                SizeWindows = false;
+            }
+            else if (SizeWindows == false)
+            {
+                WindowState = FormWindowState.Normal;
+                this.Size = new Size(1264, 761);
+                SizeWindows = true;
+            }
+        }
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            point = new Point(e.X, e.Y);
+        }
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Left += e.X - point.X;
+                this.Top += e.Y - point.Y;
+            }
         }
     }
 }

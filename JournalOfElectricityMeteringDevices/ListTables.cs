@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace JournalOfElectricityMeteringDevices
@@ -13,7 +9,7 @@ namespace JournalOfElectricityMeteringDevices
     class ListTables
     {
         private SqlConnection connection = null;
-        public void OpenList(System.Windows.Forms.ComboBox box)
+        public void OpenList(ComboBox box)
         {
             connection = new SqlConnection(ConfigurationManager.ConnectionStrings["LMD"].ConnectionString);
             connection.Open();
