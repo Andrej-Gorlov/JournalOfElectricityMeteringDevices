@@ -93,6 +93,8 @@ namespace JournalOfElectricityMeteringDevices
             turnControl.Value.TurnLebel(labelOptions, 270, "MediumSeaGreen");
             СhangeColor("MediumSeaGreen", "MediumAquamarine");
 
+            //Писать большой метод некорректно т.к может привести к потенциальным ошибкам
+            //(нужно было проверить быстродествие между паралейными патоками и PLINQ)
             Enumerable.Range(0,1).AsParallel().ForAll(x =>
             {
                 panelSQL.MouseEnter += (s, a) =>
