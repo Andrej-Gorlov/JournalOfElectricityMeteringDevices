@@ -23,6 +23,11 @@ namespace JournalOfElectricityMeteringDevices
 {
     public partial class Form1 : Form
     {
+        private SqlConnection connection = null;
+        private SqlDataAdapter dataAdapter = null;
+        private SqlCommandBuilder sqlCommandBuilder = null;
+        private DataSet dataSet = null;
+
         private Point point;
 
         Lazy<Curtain> curtain = new Lazy<Curtain>();
@@ -46,6 +51,7 @@ namespace JournalOfElectricityMeteringDevices
         bool ColorB = true;
         bool BSearch = true;
         bool SizeWindows = true;
+        private bool newRowAdding = false;
 
         public Form1()
         {
@@ -304,7 +310,8 @@ namespace JournalOfElectricityMeteringDevices
         }
         private void buttonImportExcel_Click(object sender, EventArgs e)
         {
-            importExcel.Value.Import(dataGridView1, openFD);
+           
+            importExcel.Value.Import(dataGridView1, openFD, strNameTable);
 
             if (ColorB == true)
             {
@@ -322,7 +329,7 @@ namespace JournalOfElectricityMeteringDevices
         private void buttonSave_Click(object sender, EventArgs e)
         {
             saveTable.Value.Save(dataGridView1, strNameTable);
-            buttonSave.Visible = false;
+            Calling();
         }
         private void buttonDeleteTable_Click(object sender, EventArgs e)
         {
@@ -332,8 +339,8 @@ namespace JournalOfElectricityMeteringDevices
         }
         private void buttonLoadingTable_Click(object sender, EventArgs e)
         {
-            string nameTable = strNameTable = comboBoxV.Text;
-            callingTable.Value.Calling(dataGridView1, nameTable);
+            strNameTable = comboBoxV.Text;
+            Calling();
         }
         private void buttonAddTable_Click(object sender, EventArgs e)
         {
@@ -375,6 +382,142 @@ namespace JournalOfElectricityMeteringDevices
             {
                 this.Left += e.X - point.X;
                 this.Top += e.Y - point.Y;
+            }
+        }
+        public void Calling()
+        {
+            connection = new SqlConnection(ConfigurationManager.ConnectionStrings["LMD"].ConnectionString);
+            connection.Open();
+            //'Applicant' AS 'materials'
+            dataAdapter = new SqlDataAdapter($"SELECT , N'Удалить' AS [Delete] FROM [{strNameTable}]", connection);
+            sqlCommandBuilder = new SqlCommandBuilder(dataAdapter);
+            sqlCommandBuilder.GetInsertCommand();
+            sqlCommandBuilder.GetUpdateCommand();
+            sqlCommandBuilder.GetDeleteCommand();
+            dataSet = new DataSet();
+            dataAdapter.Fill(dataSet, strNameTable);
+            dataGridView1.DataSource = dataSet.Tables[strNameTable];
+
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                DataGridViewLinkCell dataGridViewLinkCell = new DataGridViewLinkCell();
+                dataGridView1[11, i] = dataGridViewLinkCell;
+            }
+        }
+        private void ReloadData()
+        {
+            dataSet.Tables[strNameTable].Clear();
+            dataAdapter.Fill(dataSet, strNameTable);
+            dataGridView1.DataSource = dataSet.Tables[strNameTable];
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                DataGridViewLinkCell gridCell = new DataGridViewLinkCell();
+                dataGridView1[11, 1] = gridCell;
+            }
+        }
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.ColumnIndex == 11)
+                {
+                    string task = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString();
+                    if (task == "Удалить")
+                    {
+                        if (MessageBox.Show("Удалить эту строку? ", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            int rowInd = e.RowIndex;
+                            dataGridView1.Rows.RemoveAt(rowInd);
+                            dataSet.Tables[strNameTable].Rows[rowInd].Delete();
+                            dataAdapter.Update(dataSet, strNameTable);
+                        }
+                    }
+                    else if (task == "Добавить")
+                    {
+                        int rowIndex = dataGridView1.Rows.Count - 2;
+                        DataRow row = dataSet.Tables[strNameTable].NewRow();
+
+                        row["Applicant"] = dataGridView1.Rows[rowIndex].Cells["Applicant"].Value;
+                        row["Object"] = dataGridView1.Rows[rowIndex].Cells["Object"].Value;
+                        row["NutritionCenter"] = dataGridView1.Rows[rowIndex].Cells["NutritionCenter"].Value;
+                        row["Power"] = dataGridView1.Rows[rowIndex].Cells["Power"].Value;
+                        row["PUtype"] = dataGridView1.Rows[rowIndex].Cells["PUtype"].Value;
+                        row["TUnumber"] = dataGridView1.Rows[rowIndex].Cells["TUnumber"].Value;
+                        row["RelayPosition"] = dataGridView1.Rows[rowIndex].Cells["RelayPosition"].Value;
+                        row["FactoryNumber"] = dataGridView1.Rows[rowIndex].Cells["FactoryNumber"].Value;
+                        row["VerificationDate"] = dataGridView1.Rows[rowIndex].Cells["VerificationDate"].Value;
+                        row["Status"] = dataGridView1.Rows[rowIndex].Cells["Status"].Value;
+
+                        dataSet.Tables[strNameTable].Rows.Add(row);
+                        dataSet.Tables[strNameTable].Rows.RemoveAt(dataSet.Tables[strNameTable].Rows.Count - 1);
+                        dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 2);
+                        dataGridView1.Rows[e.RowIndex].Cells[11].Value = "Удалить";
+
+                        dataAdapter.Update(dataSet, strNameTable);
+                        newRowAdding = false;
+                    }
+                    else if (task == "Изменить")
+                    {
+                        int r = e.RowIndex;
+
+                        dataSet.Tables[strNameTable].Rows[r]["Applicant"] = dataGridView1.Rows[r].Cells["Applicant"].Value;
+                        dataSet.Tables[strNameTable].Rows[r]["Object"] = dataGridView1.Rows[r].Cells["Object"].Value;
+                        dataSet.Tables[strNameTable].Rows[r]["NutritionCenter"] = dataGridView1.Rows[r].Cells["NutritionCenter"].Value;
+                        dataSet.Tables[strNameTable].Rows[r]["Power"] = dataGridView1.Rows[r].Cells["Power"].Value;
+                        dataSet.Tables[strNameTable].Rows[r]["PUtype"] = dataGridView1.Rows[r].Cells["PUtype"].Value;
+                        dataSet.Tables[strNameTable].Rows[r]["TUnumber"] = dataGridView1.Rows[r].Cells["TUnumber"].Value;
+                        dataSet.Tables[strNameTable].Rows[r]["RelayPosition"] = dataGridView1.Rows[r].Cells["RelayPosition"].Value;
+                        dataSet.Tables[strNameTable].Rows[r]["FactoryNumber"] = dataGridView1.Rows[r].Cells["FactoryNumber"].Value;
+                        dataSet.Tables[strNameTable].Rows[r]["VerificationDate"] = dataGridView1.Rows[r].Cells["VerificationDate"].Value;
+                        dataSet.Tables[strNameTable].Rows[r]["Status"] = dataGridView1.Rows[r].Cells["Status"].Value;
+
+                        dataAdapter.Update(dataSet, strNameTable);
+                        dataGridView1.Rows[e.RowIndex].Cells[11].Value = "Удалить";
+                    }
+                    ReloadData();
+                }
+            }
+            catch (Exception isk)
+            {
+                MessageBox.Show(isk.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void dataGridView1_UserAddedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            try
+            {
+                if (newRowAdding == false)
+                {
+                    newRowAdding = true;
+                    int lastRow = dataGridView1.Rows.Count - 2;
+                    DataGridViewRow row = dataGridView1.Rows[lastRow];
+                    DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
+                    dataGridView1[11, lastRow] = linkCell;
+                    row.Cells["Delete"].Value = "Добавить";
+                }
+            }
+            catch (Exception isk)
+            {
+                MessageBox.Show(isk.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (newRowAdding == false)
+                {
+                    int rowIndex = dataGridView1.SelectedCells[0].RowIndex;
+                    DataGridViewRow dataGridViewRow = dataGridView1.Rows[rowIndex];
+                    DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
+                    dataGridView1[11, rowIndex] = linkCell;
+
+                    dataGridViewRow.Cells["Delete"].Value = "Изменить";
+                }
+            }
+            catch (Exception isk)
+            {
+                MessageBox.Show(isk.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

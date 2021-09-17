@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -7,35 +8,46 @@ namespace JournalOfElectricityMeteringDevices
 {
     class CallingTable
     {
-        private SqlCommand command = null;
-        private SqlDataReader reader = null;
         private SqlConnection connection = null;
-        public void Calling(DataGridView dataGridView, string nameBD)
+        private SqlDataAdapter dataAdapter = null;
+        private SqlCommandBuilder sqlCommandBuilder = null;
+        private DataSet dataSet = null;
+
+       
+
+        public void Calling(DataGridView dataGridView, string strNameTable)
         {
             connection = new SqlConnection(ConfigurationManager.ConnectionStrings["LMD"].ConnectionString);
             connection.Open();
             try
             {
+                connection = new SqlConnection(ConfigurationManager.ConnectionStrings["LMD"].ConnectionString);
+                connection.Open();
+
                 dataGridView.Rows.Clear();
 
-                int i = 0;
-                command = new SqlCommand($"SELECT * FROM [{nameBD}]", connection);
-                reader = command.ExecuteReader();
-                while (reader.Read())
+                dataAdapter = new SqlDataAdapter($"SELECT *, N'Удалить' AS [Delete] FROM [{strNameTable}]", connection);
+
+                sqlCommandBuilder = new SqlCommandBuilder(dataAdapter);
+                sqlCommandBuilder.GetInsertCommand();
+                sqlCommandBuilder.GetUpdateCommand();
+                sqlCommandBuilder.GetDeleteCommand();
+
+                dataSet = new DataSet();
+                dataAdapter.Fill(dataSet, strNameTable);
+                dataGridView.DataSource = dataSet.Tables[strNameTable];
+
+                for (int i = 0; i < dataGridView.Rows.Count; i++)
                 {
-                    i++;
-                    dataGridView.Rows.Add(i, reader["Applicant"].ToString(), reader["Object"].ToString(), reader["NutritionCenter"].ToString(),
-                        reader["Power"].ToString(), reader["PUtype"].ToString(), reader["TUnumber"].ToString(),
-                        reader["RelayPosition"].ToString(), reader["FactoryNumber"].ToString(), reader["VerificationDate"].ToString(),
-                        reader["Status"].ToString());
+                    DataGridViewLinkCell dataGridViewLinkCell = new DataGridViewLinkCell();
+                    dataGridView[11, i] = dataGridViewLinkCell;
                 }
-                reader.Close();
             }
             catch (Exception isk)
             {
                 MessageBox.Show(isk.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally { connection.Close();}
+            //finally { connection.Close(); }
         }
     }
 }

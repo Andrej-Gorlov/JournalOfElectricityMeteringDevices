@@ -9,15 +9,13 @@ namespace JournalOfElectricityMeteringDevices
     {
         private SqlCommand command = null;
         SqlConnection connection = null;
-
-        Lazy<CallingTable> callingTable = new Lazy<CallingTable>();
-        public void Save(System.Windows.Forms.DataGridView gridView, string nameTable)
+        public void Save(DataGridView gridView, string nameTable)
         {
             try
             {
                 connection = new SqlConnection(ConfigurationManager.ConnectionStrings["LMD"].ConnectionString);
 
-                for (int i = 0; i < gridView.Rows.Count; i++)
+                for (int i = 0; i < gridView.Rows.Count-1; i++)
                 {
                     connection.Open();
                     command = new SqlCommand($"INSERT INTO {nameTable}" +
@@ -38,7 +36,10 @@ namespace JournalOfElectricityMeteringDevices
                     connection.Close();
                 }
                 MessageBox.Show("Сохранение произошло", "Сообщение", MessageBoxButtons.OK);
-                callingTable.Value.Calling(gridView, nameTable);
+                for (int i = 1; i < 12; i++)
+                {
+                    gridView.Columns.Remove($"Column{i}");
+                }
             }
             catch (Exception isk)
             {
